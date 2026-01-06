@@ -171,7 +171,7 @@ def send_order(order, user_type):
             SPRING_ORDER_URL, 
             json=order,
             headers={
-                "X-Secret-Token": SECRET_TOKEN,  # 토큰 추가
+                "X-Internal-Token": SECRET_TOKEN,  # 토큰 추가
                 "Content-Type": "application/json"          # JSON 전송
             },
             timeout=2)
