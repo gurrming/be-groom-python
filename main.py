@@ -1,245 +1,155 @@
 import random
 import time
 import requests
-import psycopg2
 from threading import Thread, Lock
 
+
+
+# 기본 설정
 SPRING_ORDER_URL = "http://localhost:8080/api/orders"
-
-
-# =========================
-# 토큰 설정
-# =========================
+BOT_MEMBER_ID = 26
 SECRET_TOKEN = "heartbit-internal-secret-token"
 
+THREADS = 4
+ORDERS_PER_THREAD = 100
+ORDER_INTERVAL = 0.1
 
-# =========================
-# PostgreSQL 설정
-# =========================
-DB_CONFIG = {
-    "host": "localhost",
-    "dbname": "app",
-    "user": "postgres",
-    "password": "0000",
-    "port": 15432
-}
-
-# =========================
-# 시뮬레이션 모드
-# =========================
-SIMULATION_MODE = "NORMAL"  # NORMAL | STRESS | LIMIT
-
-if SIMULATION_MODE == "NORMAL":
-    ORDER_INTERVAL = 0.4
-    TOTAL_ORDERS_PER_THREAD = 50
-    THREADS = 2
-
-elif SIMULATION_MODE == "STRESS":
-    ORDER_INTERVAL = 0.05
-    TOTAL_ORDERS_PER_THREAD = 500
-    THREADS = 6
-
-elif SIMULATION_MODE == "LIMIT":
-    ORDER_INTERVAL = 0.01
-    TOTAL_ORDERS_PER_THREAD = 2000
-    THREADS = 20
-
-BURST_PROBABILITY = 0.08
-BURST_MULTIPLIER = 6
-
-price_lock = Lock()
 print_lock = Lock()
+success = 0
+fail = 0
 
-success_count = 0
-fail_count = 0
 
-# =========================
-# 코인 시작가 + 가중치
-# =========================
-COIN_CONFIG = {
-    "BTC":  {"price": 50000, "weight": 40},
-    "ETH":  {"price": 3000,  "weight": 25},
-    "SOL":  {"price": 120,   "weight": 10},
-    "XRP":  {"price": 0.8,   "weight": 8},
-    "BNB":  {"price": 350,   "weight": 7},
-    "ADA":  {"price": 1.2,   "weight": 5},
-    "DOGE": {"price": 0.25,  "weight": 4},
-    "AVAX": {"price": 25,    "weight": 3},
-    "DOT":  {"price": 10,    "weight": 2},
-    "LTC":  {"price": 150,   "weight": 2},
-    "LINK": {"price": 15,    "weight": 2},
-    "TRX":  {"price": 0.1,   "weight": 2},
-    "ATOM": {"price": 9,     "weight": 2},
-    "FIL":  {"price": 6,     "weight": 2},
-    "ALGO": {"price": 0.2,   "weight": 1},
-    "VET":  {"price": 0.03,  "weight": 1},
-    "XTZ":  {"price": 0.9,   "weight": 1},
-    "SHIB": {"price": 0.00001, "weight": 1},
-    "EOS":  {"price": 0.7,   "weight": 1},
-    "MATIC":{"price": 0.8,   "weight": 2}
+
+# categoryId (DB 기준)
+CATEGORY_MAP = {
+    "BTC": 41, "ETH": 42, "SOL": 43, "XRP": 44, "BNB": 45,
+    "ADA": 46, "DOGE": 47, "AVAX": 48, "DOT": 49, "LTC": 50,
+    "LINK": 51, "TRX": 52, "ATOM": 53, "FIL": 54, "ALGO": 55,
+    "VET": 56, "XTZ": 57, "SHIB": 58, "EOS": 59, "MATIC": 60
 }
 
-# =========================
-# DB 로딩
-# =========================
-def load_category_ids():
-    conn = psycopg2.connect(**DB_CONFIG)
-    cur = conn.cursor()
-    cur.execute("""
-        SELECT category_id, symbol
-        FROM category
-        WHERE category_delete = false
-    """)
-    rows = cur.fetchall()
-    conn.close()
-    # symbol 기준으로 매핑
-    return {symbol: cid for cid, symbol in rows}
+COINS = list(CATEGORY_MAP.keys())
 
-def load_user_ids():
-    conn = psycopg2.connect(**DB_CONFIG)
-    cur = conn.cursor()
-    cur.execute("""
-        SELECT member_id
-        FROM member
-        WHERE member_email LIKE 'test_user_%'
-    """)
-    rows = cur.fetchall()
-    conn.close()
 
-    if not rows:
-        raise RuntimeError("❌ 테스트 USER 계정이 없습니다.")
-    return [r[0] for r in rows]
+# 시작가
+BASE_PRICE = {
+    "BTC": 50000,
+    "ETH": 3000,
+    "SOL": 120,
+    "XRP": 0.8,
+    "BNB": 350,
+    "ADA": 1.2,
+    "DOGE": 0.25,
+    "AVAX": 25,
+    "DOT": 10,
+    "LTC": 150,
+    "LINK": 15,
+    "TRX": 0.1,
+    "ATOM": 9,
+    "FIL": 6,
+    "ALGO": 0.2,
+    "VET": 0.03,
+    "XTZ": 0.9,
+    "SHIB": 0.00001,
+    "EOS": 0.7,
+    "MATIC": 0.8
+}
 
-CATEGORY_MAP = load_category_ids()
-USER_IDS = load_user_ids()
 
-AVAILABLE_COINS = [c for c in COIN_CONFIG if c in CATEGORY_MAP]
 
-market_prices = {coin: COIN_CONFIG[coin]["price"] for coin in AVAILABLE_COINS}
-coin_weights = {coin: COIN_CONFIG[coin]["weight"] for coin in AVAILABLE_COINS}
+# 가격 생성 (±5% 랜덤)
+def random_price(coin):
+    base = BASE_PRICE[coin]
+    change_rate = random.uniform(-0.05, 0.05)  # -5% ~ +5%
+    return round(base * (1 + change_rate), 4)
 
-# =========================
-# 가격 영향
-# =========================
-def apply_price_impact(coin, order_type, amount):
-    with price_lock:
-        impact = amount * 0.0005
-        if order_type == "BUY":
-            market_prices[coin] *= (1 + impact)
-        else:
-            market_prices[coin] *= (1 - impact)
 
-def decide_order_type():
-    return random.choices(["BUY", "SELL"], weights=[55, 45])[0]
 
-# =========================
 # 주문 생성
-# =========================
-def generate_order(user_type, member_id):
-    coin = random.choices(
-        AVAILABLE_COINS,
-        weights=[coin_weights[c] for c in AVAILABLE_COINS],
-        k=1
-    )[0]
-
-    order_type = decide_order_type()
-    order_count = round(random.uniform(0.1, 5.0), 4)
-
-    apply_price_impact(coin, order_type, order_count)
+def create_order():
+    coin = random.choice(COINS)
+    order_type = random.choice(["BUY", "SELL"])
 
     return {
-        "memberId": None if user_type == "BOT" else member_id,
+        "memberId": BOT_MEMBER_ID,
         "categoryId": CATEGORY_MAP[coin],
-        "orderPrice": round(market_prices[coin], 4),
-        "orderCount": order_count,
+        "orderPrice": random_price(coin),
+        "orderCount": round(random.uniform(0.1, 3), 4),
         "orderType": order_type,
-        "isBot": user_type == "BOT",
+        "isBot": True,
         "_coin": coin
     }
 
-# =========================
-# 주문 전송 + 출력
-# =========================
-# =========================
-# 주문 전송 + 출력 (디버깅 강화)
-# =========================
-def send_order(order, user_type):
-    global success_count, fail_count
+
+
+# 주문 전송
+def send_order(order):
+    global success, fail
 
     try:
         res = requests.post(
-            SPRING_ORDER_URL, 
+            SPRING_ORDER_URL,
             json=order,
             headers={
-                "X-Internal-Token": SECRET_TOKEN,  # 토큰 추가
-                "Content-Type": "application/json"          # JSON 전송
+                "X-Internal-Token": SECRET_TOKEN,
+                "Content-Type": "application/json"
             },
-            timeout=2)
+            timeout=2
+        )
 
         with print_lock:
             if res.status_code == 200:
-                success_count += 1
-                print(f"✅ [{user_type}] {order['_coin']} {order['orderType']} "
-                      f"{order['orderCount']} @ {order['orderPrice']}")
+                success += 1
+                print(
+                    f"✅ [BOT] {order['_coin']} "
+                    f"{order['orderType']} "
+                    f"{order['orderCount']} @ {order['orderPrice']}"
+                )
             else:
-                fail_count += 1
-                print(f"❌ [{user_type}] FAIL {res.status_code}")
-                print(f"   요청 데이터: {order}")
-                print(f"   서버 응답: {res.text}")
+                fail += 1
+                print(f"❌ FAIL {res.status_code}")
+                print(f"   요청: {order}")
+                print(f"   응답: {res.text}")
 
     except Exception as e:
         with print_lock:
-            fail_count += 1
-            print(f"💥 [{user_type}] 요청 예외: {e}")
-            print(f"   요청 데이터: {order}")
+            fail += 1
+            print(f"💥 요청 예외: {e}")
+            print(f"   요청: {order}")
 
-# =========================
-# 스레드 실행
-# =========================
-def run_simulation(user_type, member_id):
-    for _ in range(TOTAL_ORDERS_PER_THREAD):
-        burst = random.random() < BURST_PROBABILITY
-        count = BURST_MULTIPLIER if burst else 1
 
-        for _ in range(count):
-            order = generate_order(user_type, member_id)
-            send_order(order, user_type)
 
+# BOT 하나의 동작
+def bot_worker():
+    for _ in range(ORDERS_PER_THREAD):
+        send_order(create_order())
         time.sleep(ORDER_INTERVAL)
 
-# =========================
+
+
 # main
-# =========================
 def main():
-    print(f"\n🚀 시뮬레이션 시작 [{SIMULATION_MODE}]")
+    print("\n🚀 BOT 주문 시뮬레이션 시작")
     start = time.time()
+
     threads = []
-
-    user_index = 0
-
-    for i in range(THREADS):
-        if i % 2 == 0:
-            t = Thread(target=run_simulation, args=("BOT", None))
-        else:
-            user_id = USER_IDS[user_index % len(USER_IDS)]
-            user_index += 1
-            t = Thread(target=run_simulation, args=("USER", user_id))
-
-        threads.append(t)
+    for _ in range(THREADS):
+        t = Thread(target=bot_worker)
         t.start()
+        threads.append(t)
 
     for t in threads:
         t.join()
 
     elapsed = time.time() - start
-    total_orders = success_count + fail_count
+    total = success + fail
 
     print("\n==============================")
-    print(f"⏱ 총 시간: {elapsed:.2f}s")
-    print(f"📦 총 주문 시도: {total_orders}")
-    print(f"✅ 성공: {success_count}")
-    print(f"❌ 실패: {fail_count}")
-    print(f"⚡ 평균 TPS: {total_orders / elapsed:.2f}")
+    print(f"총 주문 수 : {total}")
+    print(f"성공      : {success}")
+    print(f"실패      : {fail}")
+    print(f"소요 시간 : {elapsed:.2f}s")
+    print(f"평균 TPS  : {total / elapsed:.2f}")
     print("==============================")
 
 if __name__ == "__main__":
