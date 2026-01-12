@@ -2,23 +2,24 @@ import random
 import time
 import requests
 from threading import Thread, Lock
+from threading import Thread, Lock, Event
 
 
 
 # 기본 설정
-SPRING_ORDER_URL = "http://localhost:8080/api/orders"
-BOT_MEMBER_ID = 26
+SPRING_ORDER_URL = "https://api.heartbit.site/api/orders"
+BOT_MEMBER_ID = 5
 SECRET_TOKEN = "heartbit-internal-secret-token"
 
-THREADS = 4
-ORDERS_PER_THREAD = 100
-ORDER_INTERVAL = 0.1
+THREADS = 1
+ORDERS_PER_THREAD = 15
+ORDER_INTERVAL = 1
 
 print_lock = Lock()
 success = 0
 fail = 0
 
-
+stop_event = Event()
 
 # categoryId (DB 기준)
 CATEGORY_MAP = {
@@ -60,8 +61,11 @@ BASE_PRICE = {
 # 가격 생성 (±5% 랜덤)
 def random_price(coin):
     base = BASE_PRICE[coin]
-    change_rate = random.uniform(-0.05, 0.05)  # -5% ~ +5%
-    return round(base * (1 + change_rate), 4)
+    change_rate = random.uniform(-0.05, 0.05)
+    # 소수점 자리수 조정
+    decimals = 8 if base < 1 else 4
+    return round(base * (1 + change_rate), decimals)
+
 
 
 
@@ -121,22 +125,28 @@ def send_order(order):
 
 # BOT 하나의 동작
 def bot_worker():
-    for _ in range(ORDERS_PER_THREAD):
+    while not stop_event.is_set():
         send_order(create_order())
         time.sleep(ORDER_INTERVAL)
 
 
-
 # main
 def main():
-    print("\n🚀 BOT 주문 시뮬레이션 시작")
+    print("\n🚀 BOT 주문 시뮬레이션 시작 (무한 실행)")
     start = time.time()
 
     threads = []
-    for _ in range(THREADS):
-        t = Thread(target=bot_worker)
+    for i in range(THREADS):
+        t = Thread(target=bot_worker, name=f"BOT-{i}")
         t.start()
         threads.append(t)
+
+    try:
+        while True:
+            time.sleep(1)  # 메인 스레드 유지
+    except KeyboardInterrupt:
+        print("\n🛑 종료 신호 감지 (Ctrl+C)")
+        stop_event.set()
 
     for t in threads:
         t.join()

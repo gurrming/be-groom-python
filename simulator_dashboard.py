@@ -1,194 +1,167 @@
-import os
 import random
 import time
 import requests
-import psycopg2
-from threading import Thread, Lock
+from threading import Thread, Lock, Event
 from dotenv import load_dotenv
+import os
 
 # =========================
-# 환경 설정
+# 환경 변수 로드
 # =========================
 load_dotenv()
-SPRING_ORDER_URL = os.getenv("SPRING_ORDER_URL", "http://localhost:8080/api/orders")
-SECRET_TOKEN = os.getenv("SECRET_TOKEN", "heartbit-internal-secret-token")
+UPBIT_ACCESS_KEY = os.getenv("UPBIT_ACCESS_KEY")
+UPBIT_SECRET_KEY = os.getenv("UPBIT_SECRET_KEY")
 
-DB_CONFIG = {
-    "host": os.getenv("DB_HOST", "localhost"),
-    "dbname": os.getenv("DB_NAME", "app"),
-    "user": os.getenv("DB_USER", "postgres"),
-    "password": os.getenv("DB_PASSWORD", "0000"),
-    "port": int(os.getenv("DB_PORT", 15432))
-}
+# =========================
+# 기본 설정
+# =========================
+SPRING_ORDER_URL = "http://localhost:8080/api/orders"
+BOT_MEMBER_ID = 26
+SECRET_TOKEN = "heartbit-internal-secret-token"
 
-SIMULATION_MODES = {
-    "NORMAL": {"interval": 0.4, "total_orders": 50, "threads": 2},
-    "STRESS": {"interval": 0.05, "total_orders": 500, "threads": 6},
-    "LIMIT": {"interval": 0.01, "total_orders": 2000, "threads": 20},
-}
-SIMULATION_MODE = "NORMAL"
-BURST_PROBABILITY = 0.08
-BURST_MULTIPLIER = 6
+THREADS = 4
+ORDERS_PER_THREAD = 100
+ORDER_INTERVAL = 0.1
 
 print_lock = Lock()
+success = 0
+fail = 0
+stop_event = Event()
 
 # =========================
-# DB 로딩
+# DB 기준 categoryId
 # =========================
-def load_category_ids():
-    conn = psycopg2.connect(**DB_CONFIG)
-    cur = conn.cursor()
-    cur.execute("SELECT category_id, symbol FROM category WHERE category_delete = false")
-    rows = cur.fetchall()
-    conn.close()
-    return {symbol: cid for cid, symbol in rows}
-
-def load_user_ids():
-    conn = psycopg2.connect(**DB_CONFIG)
-    cur = conn.cursor()
-    cur.execute("SELECT member_id FROM member WHERE member_email LIKE 'test_user_%'")
-    rows = cur.fetchall()
-    conn.close()
-    if not rows:
-        raise RuntimeError("❌ 테스트 USER 계정이 없습니다.")
-    return [r[0] for r in rows]
-
-CATEGORY_MAP = load_category_ids()
-USER_IDS = load_user_ids()
+CATEGORY_MAP = {
+    "BTC": 41, "ETH": 42, "SOL": 43, "XRP": 44, "BNB": 45,
+    "ADA": 46, "DOGE": 47, "AVAX": 48, "DOT": 49, "LTC": 50,
+    "LINK": 51, "TRX": 52, "ATOM": 53, "FIL": 54, "ALGO": 55,
+    "VET": 56, "XTZ": 57, "SHIB": 58, "EOS": 59, "MATIC": 60
+}
 
 # =========================
-# 코인/가격 관리
+# 업비트 API
 # =========================
-class CoinMarket:
-    def __init__(self, coin_config):
-        self.market_prices = {c: coin_config[c]["price"] for c in coin_config if c in CATEGORY_MAP}
-        self.coin_weights = {c: coin_config[c]["weight"] for c in coin_config if c in CATEGORY_MAP}
-        self.lock = Lock()
-    
-    def apply_price_impact(self, coin, order_type, amount):
-        with self.lock:
-            impact = amount * 0.0005
-            if order_type == "BUY":
-                self.market_prices[coin] *= (1 + impact)
+def fetch_upbit_markets():
+    """업비트 전체 마켓 코드 조회"""
+    res = requests.get("https://api.upbit.com/v1/market/all")
+    res.raise_for_status()
+    return {m["market"] for m in res.json()}
+
+def fetch_upbit_prices(coins):
+    """KRW 마켓 현재가 조회"""
+    all_markets = fetch_upbit_markets()
+    markets = [f"KRW-{coin}" for coin in coins if f"KRW-{coin}" in all_markets]
+
+    if not markets:
+        raise RuntimeError("유효한 KRW 마켓이 하나도 없음")
+
+    res = requests.get("https://api.upbit.com/v1/ticker", params={"markets": ",".join(markets)})
+    if res.status_code != 200:
+        raise RuntimeError(f"업비트 API 실패 (status={res.status_code}) → {res.text}")
+
+    price_map = {}
+    for item in res.json():
+        coin = item["market"].split("-")[1]
+        price_map[coin] = item["trade_price"]
+    return price_map
+
+# =========================
+# 주문 생성 / 전송
+# =========================
+def random_price(coin, base_prices):
+    """기준가 대비 ±5% 랜덤 가격"""
+    base = base_prices[coin]
+    rate = random.uniform(-0.05, 0.05)
+    return round(base * (1 + rate), 4)
+
+def create_order(coins, base_prices):
+    coin = random.choice(coins)
+    order_type = random.choice(["BUY", "SELL"])
+    return {
+        "memberId": BOT_MEMBER_ID,
+        "categoryId": CATEGORY_MAP[coin],
+        "orderPrice": random_price(coin, base_prices),
+        "orderCount": round(random.uniform(0.1, 3), 4),
+        "orderType": order_type,
+        "isBot": True,
+        "_coin": coin
+    }
+
+def send_order(order):
+    global success, fail
+    try:
+        res = requests.post(
+            SPRING_ORDER_URL,
+            json=order,
+            headers={
+                "X-Internal-Token": SECRET_TOKEN,
+                "Content-Type": "application/json"
+            },
+            timeout=2
+        )
+        with print_lock:
+            if res.status_code == 200:
+                success += 1
+                print(f"✅ [BOT] {order['_coin']} {order['orderType']} {order['orderCount']} @ {order['orderPrice']}")
             else:
-                self.market_prices[coin] *= (1 - impact)
-    
-    def get_price(self, coin):
-        return round(self.market_prices[coin], 4)
-
-COIN_MARKET = CoinMarket({
-    "BTC": {"price": 50000, "weight": 40},
-    "ETH": {"price": 3000,  "weight": 25},
-    "SOL": {"price": 120,   "weight": 10},
-    "XRP": {"price": 0.8,   "weight": 8},
-    # ... 나머지 코인 생략
-})
-
-AVAILABLE_COINS = list(COIN_MARKET.market_prices.keys())
+                fail += 1
+                print(f"❌ FAIL {res.status_code} | 요청: {order}")
+    except Exception as e:
+        with print_lock:
+            fail += 1
+            print(f"💥 요청 예외: {e} | 요청: {order}")
 
 # =========================
-# 주문 생성/전송
+# BOT 스레드
 # =========================
-class OrderGenerator:
-    @staticmethod
-    def decide_order_type():
-        return random.choices(["BUY", "SELL"], weights=[55, 45])[0]
-
-    @staticmethod
-    def generate_order(user_type, member_id):
-        coin = random.choices(
-            AVAILABLE_COINS, weights=[COIN_MARKET.coin_weights[c] for c in AVAILABLE_COINS]
-        )[0]
-        order_type = OrderGenerator.decide_order_type()
-        order_count = round(random.uniform(0.1, 5.0), 4)
-        COIN_MARKET.apply_price_impact(coin, order_type, order_count)
-        return {
-            "memberId": None if user_type == "BOT" else member_id,
-            "categoryId": CATEGORY_MAP[coin],
-            "orderPrice": COIN_MARKET.get_price(coin),
-            "orderCount": order_count,
-            "orderType": order_type,
-            "isBot": user_type == "BOT",
-            "_coin": coin
-        }
-
-class OrderSender:
-    def __init__(self):
-        self.success_count = 0
-        self.fail_count = 0
-        self.lock = Lock()
-
-    def send_order(self, order, user_type):
-        try:
-            res = requests.post(
-                SPRING_ORDER_URL,
-                json=order,
-                headers={"X-Internal-Token": SECRET_TOKEN, "Content-Type": "application/json"},
-                timeout=2
-            )
-            with self.lock:
-                if res.status_code == 200:
-                    self.success_count += 1
-                    with print_lock:
-                        print(f"✅ [{user_type}] {order['_coin']} {order['orderType']} "
-                              f"{order['orderCount']} @ {order['orderPrice']}")
-                else:
-                    self.fail_count += 1
-                    with print_lock:
-                        print(f"❌ [{user_type}] FAIL {res.status_code}, {res.text}")
-        except Exception as e:
-            with self.lock:
-                self.fail_count += 1
-                with print_lock:
-                    print(f"💥 [{user_type}] 요청 예외: {e}, 데이터: {order}")
-
-ORDER_SENDER = OrderSender()
-
-# =========================
-# 스레드 시뮬레이션
-# =========================
-def run_simulation(user_type, member_id):
-    config = SIMULATION_MODES[SIMULATION_MODE]
-    for _ in range(config["total_orders"]):
-        burst = random.random() < BURST_PROBABILITY
-        count = BURST_MULTIPLIER if burst else 1
-        for _ in range(count):
-            order = OrderGenerator.generate_order(user_type, member_id)
-            ORDER_SENDER.send_order(order, user_type)
-        time.sleep(config["interval"])
+def bot_worker(coins, base_prices):
+    for _ in range(ORDERS_PER_THREAD):
+        if stop_event.is_set():
+            break
+        order = create_order(coins, base_prices)
+        send_order(order)
+        time.sleep(ORDER_INTERVAL)
 
 # =========================
 # main
 # =========================
 def main():
-    config = SIMULATION_MODES[SIMULATION_MODE]
-    print(f"\n🚀 시뮬레이션 시작 [{SIMULATION_MODE}]")
+    print("\n🚀 BOT 주문 시뮬레이션 시작")
+
+    try:
+        base_prices = fetch_upbit_prices(CATEGORY_MAP.keys())
+        coins = list(base_prices.keys())
+        print("📈 업비트 기준가 로딩 완료")
+        for c, p in base_prices.items():
+            print(f" - {c}: {p}")
+    except Exception as e:
+        print(f"❌ 업비트 API 로딩 실패: {e}")
+        return
+
     start = time.time()
     threads = []
-    user_index = 0
-
-    for i in range(config["threads"]):
-        if i % 2 == 0:
-            t = Thread(target=run_simulation, args=("BOT", None))
-        else:
-            user_id = USER_IDS[user_index % len(USER_IDS)]
-            user_index += 1
-            t = Thread(target=run_simulation, args=("USER", user_id))
-        threads.append(t)
+    for _ in range(THREADS):
+        t = Thread(target=bot_worker, args=(coins, base_prices))
         t.start()
+        threads.append(t)
 
-    for t in threads:
-        t.join()
+    try:
+        for t in threads:
+            t.join()
+    except KeyboardInterrupt:
+        print("\n🛑 종료 신호 감지 (Ctrl+C)")
+        stop_event.set()
+        for t in threads:
+            t.join()
 
     elapsed = time.time() - start
-    total_orders = ORDER_SENDER.success_count + ORDER_SENDER.fail_count
-
+    total = success + fail
     print("\n==============================")
-    print(f"⏱ 총 시간: {elapsed:.2f}s")
-    print(f"📦 총 주문 시도: {total_orders}")
-    print(f"✅ 성공: {ORDER_SENDER.success_count}")
-    print(f"❌ 실패: {ORDER_SENDER.fail_count}")
-    print(f"⚡ 평균 TPS: {total_orders / elapsed:.2f}")
+    print(f"총 주문 수 : {total}")
+    print(f"성공      : {success}")
+    print(f"실패      : {fail}")
+    print(f"소요 시간 : {elapsed:.2f}s")
+    print(f"평균 TPS  : {total / elapsed:.2f}")
     print("==============================")
 
 if __name__ == "__main__":
