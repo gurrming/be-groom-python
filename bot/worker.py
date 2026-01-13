@@ -34,7 +34,7 @@ def send_order(order: dict):
                 "X-Internal-Token": SECRET_TOKEN,
                 "Content-Type": "application/json"
             },
-            timeout=(10)
+            timeout=10
         )
 
         with print_lock:
@@ -74,12 +74,15 @@ def worker_loop():
         prices = fetch_upbit_price(coins)
 
         for coin, upbit_price in prices.items():
-            smooth_price = interpolator.smooth(coin, upbit_price)
+            smooth_prices = interpolator.smooth(coin, upbit_price)
 
-            order = create_order(coin, smooth_price)
-            send_order(order)
+            for price in smooth_prices:
+                order = create_order(coin, price)
+                send_order(order)
 
-            time.sleep(ORDER_INTERVAL)
+                # 차트 프레임 분할용 sleep
+                time.sleep(ORDER_INTERVAL / len(smooth_prices))
+
 
 def start():
     print("\n🚀 BOT 주문 시뮬레이션 시작 (무한 실행)")
