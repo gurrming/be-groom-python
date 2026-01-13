@@ -34,7 +34,7 @@ def send_order(order: dict):
                 "X-Internal-Token": SECRET_TOKEN,
                 "Content-Type": "application/json"
             },
-            timeout=(3, 5)
+            timeout=(10)
         )
 
         with print_lock:
