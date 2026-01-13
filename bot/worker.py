@@ -6,9 +6,15 @@ from bot.config import (
     SPRING_ORDER_URL,
     SECRET_TOKEN,
     THREADS,
-    ORDER_INTERVAL
+    ORDER_INTERVAL,
+    CATEGORY_MAP
 )
 from bot.order import create_order
+from bot.price import fetch_upbit_price
+from bot.interpolator import SmoothPriceInterpolator
+
+
+interpolator = SmoothPriceInterpolator(alpha=0.15)
 
 print_lock = Lock()
 stop_event = Event()
@@ -28,7 +34,7 @@ def send_order(order: dict):
                 "X-Internal-Token": SECRET_TOKEN,
                 "Content-Type": "application/json"
             },
-            timeout=2
+            timeout=(3, 5)
         )
 
         with print_lock:
@@ -52,9 +58,28 @@ def send_order(order: dict):
 
 def bot_worker():
     while not stop_event.is_set():
-        send_order(create_order())
+        order = create_order()
+
+        if order is None:
+            time.sleep(0.1)
+            continue
+
+        send_order(order)
         time.sleep(ORDER_INTERVAL)
 
+def worker_loop():
+    coins = list(CATEGORY_MAP.keys())
+
+    while True:
+        prices = fetch_upbit_price(coins)
+
+        for coin, upbit_price in prices.items():
+            smooth_price = interpolator.smooth(coin, upbit_price)
+
+            order = create_order(coin, smooth_price)
+            send_order(order)
+
+            time.sleep(ORDER_INTERVAL)
 
 def start():
     print("\n🚀 BOT 주문 시뮬레이션 시작 (무한 실행)")

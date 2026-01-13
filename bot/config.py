@@ -1,19 +1,20 @@
+# bot/config.py
 import os
 from dotenv import load_dotenv
-from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-load_dotenv(BASE_DIR / ".env")
+load_dotenv()
 
 SPRING_ORDER_URL = os.getenv("SPRING_ORDER_URL")
 BOT_MEMBER_ID = int(os.getenv("BOT_MEMBER_ID"))
 SECRET_TOKEN = os.getenv("SECRET_TOKEN")
 
-
 THREADS = int(os.getenv("THREADS", 1))
 ORDER_INTERVAL = float(os.getenv("ORDER_INTERVAL", 1))
 
-# categoryId (DB 기준)
+# 업비트 API
+UPBIT_ACCESS_KEY = os.getenv("UPBIT_ACCESS_KEY")
+UPBIT_SECRET_KEY = os.getenv("UPBIT_SECRET_KEY")
+
 CATEGORY_MAP = {
     "BTC": 41, "ETH": 42, "SOL": 43, "XRP": 44, "BNB": 45,
     "ADA": 46, "DOGE": 47, "AVAX": 48, "DOT": 49, "LTC": 50,
@@ -23,25 +24,18 @@ CATEGORY_MAP = {
 
 COINS = list(CATEGORY_MAP.keys())
 
-BASE_PRICE = {
-    "BTC": 50000,
-    "ETH": 3000,
-    "SOL": 120,
-    "XRP": 0.8,
-    "BNB": 350,
-    "ADA": 1.2,
-    "DOGE": 0.25,
-    "AVAX": 25,
-    "DOT": 10,
-    "LTC": 150,
-    "LINK": 15,
-    "TRX": 0.1,
-    "ATOM": 9,
-    "FIL": 6,
-    "ALGO": 0.2,
-    "VET": 0.03,
-    "XTZ": 0.9,
-    "SHIB": 0.00001,
-    "EOS": 0.7,
-    "MATIC": 0.8
+# bot/config.py
+
+COIN_WEIGHTS = {
+    "BTC": 0.40,
+    "ETH": 0.25,
+    "SOL": 0.10,
+    "XRP": 0.08,
+    "ADA": 0.05,
+    "DOGE": 0.04,
+    "AVAX": 0.03,
+    "DOT": 0.02,
+    "LTC": 0.02,
+    "LINK": 0.01
 }
+
