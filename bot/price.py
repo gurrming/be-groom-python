@@ -75,7 +75,7 @@ def random_price(coin: str) -> Optional[float]:
     if base_price is None:
         return None
 
-    change_rate = random.uniform(-0.01, 0.01)
+    change_rate = random.uniform(-0.05, 0.05)
     price = base_price * (1 + change_rate)
 
     decimals = 8 if price < 1 else 4

@@ -15,16 +15,14 @@ ORDER_INTERVAL = float(os.getenv("ORDER_INTERVAL", 1))
 UPBIT_ACCESS_KEY = os.getenv("UPBIT_ACCESS_KEY")
 UPBIT_SECRET_KEY = os.getenv("UPBIT_SECRET_KEY")
 
-CATEGORY_MAP = {
-    "BTC": 41, "ETH": 42, "SOL": 43, "XRP": 44, "BNB": 45,
-    "ADA": 46, "DOGE": 47, "AVAX": 48, "DOT": 49, "LTC": 50,
-    "LINK": 51, "TRX": 52, "ATOM": 53, "FIL": 54, "ALGO": 55,
-    "VET": 56, "XTZ": 57, "SHIB": 58, "EOS": 59, "MATIC": 60
-}
-
-COINS = list(CATEGORY_MAP.keys())
-
 # bot/config.py
+
+CATEGORY_MAP = {
+    "BTC": 41, "ETH": 42, "SOL": 43, "XRP": 44,
+    "ADA": 46, "DOGE": 47, "DOT": 49, "LTC": 50,
+    "LINK": 51, "TRX": 52, "ATOM": 53, "FIL": 54,
+    "ALGO": 55, "SHIB": 58, "EOS": 59, "MATIC": 60
+}
 
 COIN_WEIGHTS = {
     "BTC": 0.40,
@@ -33,9 +31,11 @@ COIN_WEIGHTS = {
     "XRP": 0.08,
     "ADA": 0.05,
     "DOGE": 0.04,
-    "AVAX": 0.03,
     "DOT": 0.02,
     "LTC": 0.02,
     "LINK": 0.01
 }
+
+# ✅ 단일 진실 소스
+COINS = sorted(set(CATEGORY_MAP) & set(COIN_WEIGHTS))
 
