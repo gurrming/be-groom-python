@@ -83,18 +83,31 @@ class NewsAggregator:
             print(f"❌ CryptoPanic 에러: {e}")
 
     def fetch_alpha_vantage(self):
-        """AlphaVantage: 전체 수집 후 DB 카테고리와 매칭"""
+        """AlphaVantage: 디버깅 코드 추가 버전"""
         categories = self._get_db_categories()
-        if not categories or not self.tokens["ALPHAVANTAGE"]: return
+        if not categories or not self.tokens["ALPHAVANTAGE"]: 
+            print("⚠️ AV: 카테고리 로드 실패 또는 토큰 없음")
+            return
 
         url = f"https://www.alphavantage.co/query?function=NEWS_SENTIMENT&topics=crypto&limit=100&apikey={self.tokens['ALPHAVANTAGE']}"
         try:
             res = requests.get(url)
             data = res.json()
+            
+            # [디버깅 추가] API 응답 확인
+            if "Note" in data:
+                print(f"⚠️ AV: API 호출 한도 초과 (Note 발생)")
+                return
+            if "ErrorMessage" in data:
+                print(f"❌ AV: API 에러 - {data['ErrorMessage']}")
+                return
+
             articles = data.get('feed', [])
+            print(f"📡 AV: {len(articles)}개의 뉴스를 수신함.") # 뉴스 수신 확인
+
             matched_list = []
             for art in articles:
-                # AV가 제공하는 티커들 추출
+                # AV 제공 티커 추출 및 확인
                 av_tickers = [t.get('ticker', '').replace("CRYPTO:", "").upper() for t in art.get('ticker_sentiment', [])]
                 
                 for cat in categories:
@@ -103,9 +116,12 @@ class NewsAggregator:
                         item['assigned_ticker'] = cat['symbol']
                         item['assigned_category_id'] = cat['id']
                         matched_list.append(item)
+            
+            print(f"🔍 AV: 상위 4개 코인과 매칭된 뉴스 {len(matched_list)}건.") # 매칭 결과 확인
             self._save_to_db(matched_list, "ALPHAVANTAGE")
+            
         except Exception as e:
-            print(f"❌ AV 에러: {e}")
+            print(f"❌ AV 실행 중 예외 발생: {e}")
 
     def _save_to_db(self, items, source):
         if not items: return
