@@ -37,6 +37,8 @@ rm -rf venv
 2️⃣ Python 버전 확인 (권장: 3.9 ~ 3.11)
 python --version
 
+가상환경 나가는 코드
+deactivate
 
 ❌ Python 3.13 / 3.14 사용 시 일부 라이브러리 호환 문제 발생 가능
 ✅ Python 3.9 ~ 3.11 권장
@@ -90,17 +92,13 @@ touch bot/__init__.py
 
 9️⃣ BOT 실행 방법 (권장 방식)
 ✅ 가장 안정적인 실행 (권장)
-python bot/run_bot.py
+python run_bot.py
 
 
-⚠️ 패키지 방식 실행 (구조 정확해야 함)
-python -m bot.run_bot
 
 
-이 방식은 다음 조건이 모두 충족되어야 합니다:
+pip install psycopg2-binary
 
-bot/__init__.py 존재
+pip install schedule
 
-프로젝트 루트에서 실행
-
-import가 bot.xxx 또는 .xxx 형태
+pip install psycopg2-binary transformers torch nltk
