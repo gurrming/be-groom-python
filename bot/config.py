@@ -15,13 +15,11 @@ ORDER_INTERVAL = float(os.getenv("ORDER_INTERVAL", 1))
 UPBIT_ACCESS_KEY = os.getenv("UPBIT_ACCESS_KEY")
 UPBIT_SECRET_KEY = os.getenv("UPBIT_SECRET_KEY")
 
-# bot/config.py
-
 CATEGORY_MAP = {
-    "BTC": 41, "ETH": 42, "SOL": 43, "XRP": 44,
-    "ADA": 46, "DOGE": 47, "DOT": 49, "LTC": 50,
-    "LINK": 51, "TRX": 52, "ATOM": 53, "FIL": 54,
-    "ALGO": 55, "SHIB": 58, "EOS": 59, "MATIC": 60
+    "BTC": 1, "ETH": 2, "SOL": 3, "XRP": 4,
+    "ADA": 6, "DOGE": 7, "DOT": 9, "LTC": 10,
+    "LINK": 11, "TRX": 12, "ATOM": 13, "FIL": 14, 
+    "ALGO": 15, "SHIB": 18, "EOS": 19, "MATIC": 20
 }
 
 COIN_WEIGHTS = {
