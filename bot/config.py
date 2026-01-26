@@ -18,7 +18,7 @@ UPBIT_SECRET_KEY = os.getenv("UPBIT_SECRET_KEY")
 CATEGORY_MAP = {
     "BTC": 1, "ETH": 2, "SOL": 3, "XRP": 4,
     "ADA": 6, "DOGE": 7, "DOT": 9, "LTC": 10,
-    "LINK": 11, "TRX": 12, "ATOM": 13, "FIL": 14, 
+    "LINK": 11, "TRX": 12, "ATOM": 13, "FIL": 14,
     "ALGO": 15, "SHIB": 18, "EOS": 19, "MATIC": 20
 }
 
