@@ -71,11 +71,11 @@ def get_cached_price(coin: str) -> Optional[float]:
 
 def format_price(price: float):
     if price >= 100:
-        return int(round(price))
+        return float(int(price)) # 정수화
     elif price >= 10:
-        return round(price, 1)
+        return round(float(int(price * 10) / 10), 1) # 소수점 1자리 절삭
     else:
-        return round(price, 2)
+        return round(float(int(price * 100) / 100), 2) # 소수점 2자리 절삭
 
 
 def random_price(coin: str) -> Optional[float]:

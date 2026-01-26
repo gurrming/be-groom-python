@@ -16,11 +16,11 @@ UPBIT_SECRET_KEY = os.getenv("UPBIT_SECRET_KEY")
 # 기본 설정
 # =========================
 SPRING_ORDER_URL = "http://localhost:8080/api/orders"
-BOT_MEMBER_ID = 26
+BOT_MEMBER_ID = 1
 SECRET_TOKEN = "heartbit-internal-secret-token"
 
 THREADS = 4
-ORDERS_PER_THREAD = 100
+ORDERS_PER_THREAD = 1000
 ORDER_INTERVAL = 0.1
 
 print_lock = Lock()
@@ -32,10 +32,10 @@ stop_event = Event()
 # DB 기준 categoryId
 # =========================
 CATEGORY_MAP = {
-    "BTC": 41, "ETH": 42, "SOL": 43, "XRP": 44, "BNB": 45,
-    "ADA": 46, "DOGE": 47, "AVAX": 48, "DOT": 49, "LTC": 50,
-    "LINK": 51, "TRX": 52, "ATOM": 53, "FIL": 54, "ALGO": 55,
-    "VET": 56, "XTZ": 57, "SHIB": 58, "EOS": 59, "MATIC": 60
+    "BTC": 1, "ETH": 2, "SOL": 3, "XRP": 4, "BNB": 5,
+    "ADA": 6, "DOGE": 7, "AVAX": 8, "DOT": 9, "LTC": 10,
+    "LINK": 11, "TRX": 12, "ATOM": 13, "FIL": 14, "ALGO": 15,
+    "VET": 16, "XTZ": 17, "SHIB": 18, "EOS": 19, "MATIC": 20
 }
 
 # =========================
