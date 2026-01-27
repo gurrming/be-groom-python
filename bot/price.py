@@ -70,6 +70,15 @@ def get_cached_price(coin: str) -> Optional[float]:
 
 
 def format_price(price: float):
+    if price <= 0:
+        return 0.01
+    
+    if price >= 1_000_000:
+        return int(round(price, -3))
+    
+    elif price >= 100_000:
+        return int(round(price, -2))
+    
     if price >= 100:
         return int(round(price))
     elif price >= 10:
@@ -86,6 +95,7 @@ def random_price(coin: str) -> Optional[float]:
 
     change_rate = random.uniform(-0.05, 0.05)
     price = base_price * (1 + change_rate)
+    
+    price = max(price, 0.01)
 
-    decimals = 8 if price < 1 else 4
-    return format_price(price)
+    return format_price(price)    

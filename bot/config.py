@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 SPRING_ORDER_URL = os.getenv("SPRING_ORDER_URL")
-BOT_MEMBER_ID = int(os.getenv("BOT_MEMBER_ID"))
+BOT_ID = int(os.getenv("BOT_ID"))
 SECRET_TOKEN = os.getenv("SECRET_TOKEN")
 
 THREADS = int(os.getenv("THREADS", 1))

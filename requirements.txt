@@ -5,6 +5,9 @@ python-dotenv==1.0.1
 pyupbit==0.2.34
 schedule==1.2.1
 
+fastapi
+uvicorn
+
 # 데이터 및 시각화
 pandas==2.2.1
 numpy==1.26.4
@@ -18,6 +21,7 @@ PyJWT==2.8.0
 websockets==12.0
 python-dateutil==2.9.0
 typing_extensions==4.10.0
+
 
 # 시스템 종속 라이브러리 (버전 고정 해제하여 호환성 확보)
 altgraph
