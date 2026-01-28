@@ -93,8 +93,11 @@ def random_price(coin: str) -> Optional[float]:
     if base_price is None:
         return None
 
+    SIM_FLOOR = 1.00 
+    effective_base = max(base_price, SIM_FLOOR)
+    
     change_rate = random.uniform(-0.05, 0.05)
-    price = base_price * (1 + change_rate)
+    price = effective_base * (1 + change_rate)
     
     price = max(price, 0.01)
 

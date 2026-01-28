@@ -1,41 +1,33 @@
-# bot/config.py
 import os
+import psycopg2
 from dotenv import load_dotenv
 
 load_dotenv()
 
+# DB 연결 정보 (기존 설정 활용)
+def get_db_connection():
+    return psycopg2.connect(
+        host="localhost", port="15432",
+        database="app", user="postgres", password="0000"
+    )
+
+def load_categories_from_db():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    # DB에 저장된 모든 코인을 가져옴
+    cur.execute("SELECT symbol, category_id FROM public.category;")
+    db_data = cur.fetchall()
+    cur.close()
+    conn.close()
+    return {row[0]: row[1] for row in db_data}
+
+# 실시간으로 카테고리 맵 생성
+CATEGORY_MAP = load_categories_from_db()
+COINS = list(CATEGORY_MAP.keys())
+
+# 기존 환경 변수들
 SPRING_ORDER_URL = os.getenv("SPRING_ORDER_URL")
 BOT_ID = int(os.getenv("BOT_ID"))
 SECRET_TOKEN = os.getenv("SECRET_TOKEN")
-
-THREADS = int(os.getenv("THREADS", 1))
-ORDER_INTERVAL = float(os.getenv("ORDER_INTERVAL", 1))
-
-# 업비트 API
-UPBIT_ACCESS_KEY = os.getenv("UPBIT_ACCESS_KEY")
-UPBIT_SECRET_KEY = os.getenv("UPBIT_SECRET_KEY")
-
-# bot/config.py
-
-CATEGORY_MAP = {
-    "BTC": 1, "ETH": 2, "SOL": 3, "XRP": 4,
-    "ADA": 6, "DOGE": 7, "DOT": 9, "LTC": 10,
-    "LINK": 11, "TRX": 12, "ATOM": 13, "FIL": 14,
-    "ALGO": 15, "SHIB": 18, "EOS": 19, "MATIC": 20
-}
-
-COIN_WEIGHTS = {
-    "BTC": 0.40,
-    "ETH": 0.25,
-    "SOL": 0.10,
-    "XRP": 0.08,
-    "ADA": 0.05,
-    "DOGE": 0.04,
-    "DOT": 0.02,
-    "LTC": 0.02,
-    "LINK": 0.01
-}
-
-# ✅ 단일 진실 소스
-COINS = sorted(set(CATEGORY_MAP) & set(COIN_WEIGHTS))
-
+THREADS = int(os.getenv("THREADS"))
+ORDER_INTERVAL = float(os.getenv("ORDER_INTERVAL"))
