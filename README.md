@@ -17,7 +17,8 @@ Spring Boot 주문 API 부하 테스트 및 자동 거래 시뮬레이션을 위
 rm -rf venv
 
 # 2. 가상환경 생성 (Python 3.9 ~ 3.11 권장)
-python -m venv venv
+# python -m venv venv
+python3.9 -m venv venv
 
 # 3. 가상환경 활성화
 source venv/bin/activate  # (Windows는 .\venv\Scripts\activate)
@@ -63,21 +64,21 @@ SELECT category_id, category_name, symbol FROM category;
 
 -- 1. 삭제 대상(리스트에 없는 4개)과 연결된 주문/거래 내역 먼저 정리
 DELETE FROM trade WHERE order_id IN (
-    SELECT order_id FROM orders 
-    WHERE category_id NOT IN (1, 2, 3, 4, 6, 7, 9, 10, 11, 12, 13, 14, 15, 18, 19, 20)
+SELECT order_id FROM orders
+WHERE category_id NOT IN (1, 2, 3, 4, 6, 7, 9, 10, 11, 12, 13, 14, 15, 18, 19, 20)
 );
 
-DELETE FROM orders 
+DELETE FROM orders
 WHERE category_id NOT IN (1, 2, 3, 4, 6, 7, 9, 10, 11, 12, 13, 14, 15, 18, 19, 20);
 
-DELETE FROM interest 
+DELETE FROM interest
 WHERE category_id NOT IN (1, 2, 3, 4, 6, 7, 9, 10, 11, 12, 13, 14, 15, 18, 19, 20);
 
-DELETE FROM asset 
+DELETE FROM asset
 WHERE category_id NOT IN (1, 2, 3, 4, 6, 7, 9, 10, 11, 12, 13, 14, 15, 18, 19, 20);
 
 -- 2. 해당하지 않는 나머지 4개 코인 삭제
-DELETE FROM category 
+DELETE FROM category
 WHERE category_id NOT IN (1, 2, 3, 4, 6, 7, 9, 10, 11, 12, 13, 14, 15, 18, 19, 20);
 
 -- 3. 최종 남은 16개 코인 확인
@@ -112,9 +113,9 @@ python run_bot.py
 
 ## ⚠️ 주의사항 및 트러블슈팅
 
-* **Python 버전:** `3.13` 이상에서는 일부 라이브러리(torch 등)가 불안정할 수 있으니 `3.9~3.11` 사용을 권장합니다.
-* **환경 변수:** `.env` 파일에 작성자님의 개인 정보가 포함되어 있을 수 있습니다. 팀원들은 각자 본인의 로컬 환경에 맞게 `.env` 내용을 수정해야 합니다.
-* **경로 확인:** `which python` 명령어를 쳤을 때 경로에 `venv`가 포함되어 있지 않다면 가상환경이 켜지지 않은 것입니다.
-* **필수 패키지:** `psycopg2-binary`, `schedule`, `transformers` 등이 `requirements.txt`에 포함되어 있는지 확인하세요.
+- **Python 버전:** `3.13` 이상에서는 일부 라이브러리(torch 등)가 불안정할 수 있으니 `3.9~3.11` 사용을 권장합니다.
+- **환경 변수:** `.env` 파일에 작성자님의 개인 정보가 포함되어 있을 수 있습니다. 팀원들은 각자 본인의 로컬 환경에 맞게 `.env` 내용을 수정해야 합니다.
+- **경로 확인:** `which python` 명령어를 쳤을 때 경로에 `venv`가 포함되어 있지 않다면 가상환경이 켜지지 않은 것입니다.
+- **필수 패키지:** `psycopg2-binary`, `schedule`, `transformers` 등이 `requirements.txt`에 포함되어 있는지 확인하세요.
 
 ---

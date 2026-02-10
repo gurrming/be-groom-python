@@ -7,7 +7,8 @@ from bot.config import (
     SECRET_TOKEN,
     THREADS,
     ORDER_INTERVAL,
-    CATEGORY_MAP
+    CATEGORY_MAP,
+    COINS,
 )
 from bot.order import create_order
 from bot.price import fetch_upbit_price
@@ -86,6 +87,10 @@ def worker_loop():
 
 def start():
     print("\n🚀 BOT 주문 시뮬레이션 시작 (무한 실행)")
+    if not COINS:
+        print("❌ 사용할 코인이 없습니다. .env의 BOT_SYMBOLS와 DB category 테이블을 확인하세요.")
+        return
+    print(f"   사용 코인: {', '.join(COINS)}")
     start_time = time.time()
 
     threads = []

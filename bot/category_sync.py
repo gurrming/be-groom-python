@@ -17,11 +17,11 @@ def sync_upbit_categories():
 
     # DB 접속 정보 (사용자 제공 정보 반영)
     db_params = {
-        "host": "heartbit-db.c3qieeu84ouk.ap-southeast-2.rds.amazonaws.com",
-        "port": "5432",
-        "database": "heartbit",
-        "user": "postgre",
-        "password": "heartbit,,1234",
+        "host": "localhost",
+        "port": "15432",
+        "database": "app",
+        "user": "postgres",
+        "password": "0000",
         "connect_timeout": 5
     }
     
