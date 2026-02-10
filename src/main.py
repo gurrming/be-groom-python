@@ -1,47 +1,87 @@
 import threading
 import schedule
 import time
+from datetime import datetime, timedelta, timezone
 from collectors.news_aggregator import NewsAggregator
 
-# collector 인스턴스 생성
+# 공용 인스턴스
 collector = NewsAggregator()
 
+def fetch_historical_bulk():
+    """
+    2025년 10월 1일부터 현재까지의 데이터를 수집합니다.
+    """
+    print("\n📚 [과거 데이터 수집 모드] 2025-10-01 ~ 현재 데이터 수집 시작...")
+    
+    # 1. CryptoPanic: 날짜를 거슬러 올라가며 수집 (Loop)
+    target_date = datetime(2025, 10, 1, tzinfo=timezone.utc)
+    
+    # 별도 스레드로 실행하여 병렬 처리
+    t_cp = threading.Thread(
+        target=collector.fetch_cryptopanic, 
+        args=(target_date,), # target_date 인자 전달
+        name="History-CryptoPanic"
+    )
+    t_cp.start()
+
+    # 2. AlphaVantage: 월 단위로 쪼개서 수집 (1000건 제한 회피용)
+    # 2025년 10월부터 현재까지 월별로 루프
+    start_dt = datetime(2025, 10, 1)
+    now = datetime.now()
+    
+    while start_dt < now:
+        # 한 달 간격 설정 (매월 1일 ~ 말일/다음달 1일)
+        # 간단하게 30일 단위로 끊어서 요청
+        end_dt = start_dt + timedelta(days=30)
+        if end_dt > now:
+            end_dt = now
+            
+        t_str = start_dt.strftime('%Y%m%dT%H%M')
+        e_str = end_dt.strftime('%Y%m%dT%H%M')
+        
+        print(f"📥 AlphaVantage 기간 요청: {t_str} ~ {e_str}")
+        collector.fetch_alpha_vantage(start_time=t_str, end_time=e_str)
+        
+        start_dt = end_dt + timedelta(minutes=1) # 다음 구간 시작
+        time.sleep(2) # API Rate Limit 고려
+
+    t_cp.join() # CryptoPanic 완료 대기
+    print("🎉 과거 데이터 수집이 모두 완료되었습니다.")
+
 def job():
-    print(f"\n⏰ [{time.strftime('%Y-%m-%d %H:%M:%S')}] 정기 뉴스 수집 프로세스 시작...")
+    """주기적 실행 (최신 데이터만)"""
+    now_str = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    print(f"\n⏰ [{now_str}] 실시간 통합 뉴스 수집 프로세스 시작...")
     
-    # 수정된 클래스는 내부에서 DB 카테고리를 직접 조회하므로 TARGET_COINS를 인자로 줄 필요가 없습니다.
-    threads = [
-        threading.Thread(target=collector.fetch_cryptopanic, name="CryptoPanic"),
-        threading.Thread(target=collector.fetch_alpha_vantage, name="AlphaVantage")
-    ]
+    # 평소에는 인자 없이 호출 (Top 4 코인만, 최신 데이터만)
+    t1 = threading.Thread(target=collector.fetch_cryptopanic, name="CryptoPanic")
+    t2 = threading.Thread(target=collector.fetch_alpha_vantage, name="AlphaVantage")
 
-    for t in threads:
-        t.start()
-        print(f"📡 {t.name} 수집 쓰레드 가동...")
+    t1.start()
+    t2.start()
 
-    for t in threads:
-        t.join()
+    t1.join()
+    t2.join()
+    print(f"✨ [{datetime.now().strftime('%H:%M:%S')}] 실시간 수집 완료.")
 
-    print(f"✨ [{time.strftime('%H:%M:%S')}] 모든 수집 작업이 완료되었습니다.")
-
-def main():
-    # 1. 즉시 한 번 실행하여 정상 작동 확인
-    job() 
+if __name__ == "__main__":
+    # --- [중요] 과거 데이터 수집 실행 ---
+    # 최초 1회 실행 후에는 주석 처리해도 됩니다.
+    print("🚀 시스템 시작: 과거 데이터 확인 중...")
+    fetch_historical_bulk() 
     
-    # 2. 60분 간격으로 스케줄링
+    # --- 스케줄러 실행 ---
+    # 60분 간격 스케줄링 (실시간 데이터)
     schedule.every(60).minutes.do(job)
 
-    print("🚀 뉴스 수집 스케줄러 가동 중 (60분 간격)...")
+    print("\n🚀 뉴스 통합 수집 스케줄러 가동 중 (60분 간격)...")
     while True:
         try:
             schedule.run_pending()
             time.sleep(1)
         except KeyboardInterrupt:
-            print("\n👋 사용자에 의해 수집기가 종료되었습니다.")
+            print("\n👋 종료합니다.")
             break
         except Exception as e:
-            print(f"⚠️ 스케줄러 오류 발생: {e}")
-            time.sleep(60) # 오류 발생 시 1분 대기 후 재시도
-
-if __name__ == "__main__":
-    main()
+            print(f"⚠️ 스케줄러 오류: {e}")
+            time.sleep(60)

@@ -8,7 +8,7 @@ UPBIT_MARKET_URL = "https://api.upbit.com/v1/market/all"
 UPBIT_TICKER_URL = "https://api.upbit.com/v1/ticker"
 
 # ===== 캐시 설정 =====
-PRICE_TTL = 1.0  # seconds
+PRICE_TTL = 60.0  # seconds
 PRICE_CACHE: Dict[str, Tuple[float, float]] = {}
 
 # KRW 마켓 캐시
@@ -33,6 +33,9 @@ def load_krw_markets():
 
 
 def fetch_upbit_price(coin: str) -> Optional[float]:
+
+    time.sleep(0.1)
+
     krw_markets = load_krw_markets()
 
     if coin not in krw_markets:
@@ -70,6 +73,15 @@ def get_cached_price(coin: str) -> Optional[float]:
 
 
 def format_price(price: float):
+    if price <= 0:
+        return 0.01
+    
+    if price >= 1_000_000:
+        return int(round(price, -3))
+    
+    elif price >= 100_000:
+        return int(round(price, -2))
+    
     if price >= 100:
         return int(round(price))
     elif price >= 10:
@@ -84,8 +96,12 @@ def random_price(coin: str) -> Optional[float]:
     if base_price is None:
         return None
 
+    SIM_FLOOR = 1.00 
+    effective_base = max(base_price, SIM_FLOOR)
+    
     change_rate = random.uniform(-0.05, 0.05)
-    price = base_price * (1 + change_rate)
+    price = effective_base * (1 + change_rate)
+    
+    price = max(price, 0.01)
 
-    decimals = 8 if price < 1 else 4
-    return format_price(price)
+    return format_price(price)    
