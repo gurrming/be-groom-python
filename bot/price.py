@@ -8,7 +8,7 @@ UPBIT_MARKET_URL = "https://api.upbit.com/v1/market/all"
 UPBIT_TICKER_URL = "https://api.upbit.com/v1/ticker"
 
 # ===== 캐시 설정 =====
-PRICE_TTL = 1.0  # seconds
+PRICE_TTL = 60.0  # seconds
 PRICE_CACHE: Dict[str, Tuple[float, float]] = {}
 
 # KRW 마켓 캐시
@@ -33,6 +33,9 @@ def load_krw_markets():
 
 
 def fetch_upbit_price(coin: str) -> Optional[float]:
+
+    time.sleep(0.1)
+
     krw_markets = load_krw_markets()
 
     if coin not in krw_markets:

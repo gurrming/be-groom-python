@@ -1,52 +1,59 @@
 import pandas as pd
-import psycopg2
+from sqlalchemy import create_engine, text
 
-def find_real_gaps_after_oct(ticker='BTC'):
-    conn = psycopg2.connect(host="localhost", port=15432, user="postgres", password="0000", database="app")
-    
-    # 1. 10월 1일 이후 가격 데이터만 가져오기
-    price_query = f"""
-        SELECT trade_time, trade_price 
-        FROM market_price 
-        WHERE ticker='{ticker}' AND trade_time >= '2025-10-01 00:00:00+09'
-    """
-    price_df = pd.read_sql(price_query, conn)
-    price_df['trade_time'] = pd.to_datetime(price_df['trade_time'], utc=True)
-    
-    # 2. 감정 데이터 가져오기
-    sent_query = f"""
-        SELECT date_trunc('hour', published_at) as hr, AVG(sentiment_score) as sent_score
-        FROM (
-            SELECT ticker, published_at, sentiment_score FROM news_data
-            UNION ALL
-            SELECT ticker, published_at, sentiment_score FROM community_data
-        ) combined
-        WHERE ticker = '{ticker}' AND published_at >= '2025-10-01 00:00:00+09'
-        GROUP BY hr
-    """
-    sent_df = pd.read_sql(sent_query, conn)
-    sent_df['hr'] = pd.to_datetime(sent_df['hr'], utc=True)
-    
-    # 3. 데이터 병합
-    merged = pd.merge(price_df, sent_df, left_on='trade_time', right_on='hr', how='left')
-    
-    # 4. 공백 구간 분석
-    real_missing = merged[merged['sent_score'].isna()].copy()
-    
-    conn.close()
+DB_USER = "postgres"      
+DB_PASSWORD = "0000"  
+DB_HOST = "localhost"          
+DB_PORT = "15432"               
+DB_NAME = "app"       
 
-    print(f"📊 [{ticker}] 10월 이후 진짜 공백 분석")
-    print(f"- 수집 시작 이후 총 시간: {len(merged)}시간")
-    print(f"- 데이터 존재 시간: {len(merged) - len(real_missing)}시간")
-    print(f"- 데이터 공백 시간: {len(real_missing)}시간")
-    print(f"- **데이터 밀도(Density): {((len(merged) - len(real_missing)) / len(merged) * 100):.2f}%**")
-    print("-" * 50)
-    
-    if not real_missing.empty:
-        print("🕒 [가장 최근 공백 시간대 10개]")
-        print(real_missing['trade_time'].tail(10).dt.strftime('%Y-%m-%d %H:%M').values)
-    
-    return real_missing
+def verify_data_fixed():
+    engine = create_engine(f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}")
+    print("\n📊 [재검증] 데이터 품질 확인\n")
 
-# 실행
-real_missing_df = find_real_gaps_after_oct('BTC')
+    with engine.connect() as conn:
+        # 1. 핵심 키워드 재검사
+        print("1️⃣ 핵심 키워드 재검사")
+        keywords = ["떡락", "Drained", "drained", "무섭다", "공포", "롱", "가즈아"]
+        
+        for kw in keywords:
+            query = text(f"""
+                SELECT title, sentiment_label, sentiment_score
+                FROM community_data
+                WHERE (title LIKE :kw OR description LIKE :kw)
+                AND sentiment_label IS NOT NULL  -- NULL 제외
+                ORDER BY community_id DESC
+                LIMIT 1
+            """)
+            df = pd.read_sql(query, conn, params={"kw": f"%{kw}%"})
+            
+            if not df.empty:
+                row = df.iloc[0]
+                label = row['sentiment_label']
+                score = row['sentiment_score']
+                
+                # 라벨이 None일 경우 방지
+                if label:
+                    label = label.lower()
+                    print(f" • '{kw}': [{label.upper()}] ({score:.4f})")
+                else:
+                    print(f" • '{kw}': [NULL] (분석 안됨)")
+            else:
+                print(f" • '{kw}': 데이터 없음")
+        
+        print("-" * 30)
+
+        # 2. 전체 분포 (에러 수정됨)
+        print("2️⃣ 전체 분포")
+        # NULL이 아닌 것만 카운트
+        dist_query = "SELECT sentiment_label, COUNT(*) as cnt FROM community_data WHERE sentiment_label IS NOT NULL GROUP BY sentiment_label"
+        df_dist = pd.read_sql(dist_query, conn)
+        
+        total = df_dist['cnt'].sum()
+        for _, row in df_dist.iterrows():
+            if row['sentiment_label']: # None 체크
+                ratio = (row['cnt'] / total) * 100
+                print(f" • {row['sentiment_label'].upper()}: {row['cnt']} ({ratio:.1f}%)")
+
+if __name__ == "__main__":
+    verify_data_fixed()

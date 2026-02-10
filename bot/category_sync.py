@@ -1,6 +1,10 @@
+import os
+from dotenv import load_dotenv
 import requests
 import psycopg2
 from psycopg2.extras import execute_values
+
+load_dotenv()
 
 def sync_upbit_categories():
     # 1. 업비트 정보 가져오기 (기존 로직 동일)
@@ -14,17 +18,28 @@ def sync_upbit_categories():
     for m in krw_markets:
         symbol = m['market'].replace('KRW-', '')
         upbit_symbols[symbol] = SPECIAL_NAMES.get(symbol, m['korean_name'])
-
+    '''
     # DB 접속 정보 (사용자 제공 정보 반영)
     db_params = {
-        "host": "heartbit-db.c3qieeu84ouk.ap-southeast-2.rds.amazonaws.com",
+        "host": "54. .24.150",
         "port": "5432",
         "database": "heartbit",
-        "user": "postgre",
+        "user": "postgres",
         "password": "heartbit,,1234",
-        "connect_timeout": 5
+        "connect_timeout": 5,
+        "sslmode": "require"      
     }
-    
+    '''
+    db_params = {
+        "user": "postgres",
+        "password": "0000",
+        "database": "app", 
+        "host": "localhost",
+        "port": 15432,
+        "connect_timeout": 5,
+        "sslmode": "disable"      
+    }
+
     conn = psycopg2.connect(**db_params)
     cur = conn.cursor()
 

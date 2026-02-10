@@ -1,76 +1,221 @@
-import psycopg2
-from transformers import pipeline
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-import numpy as np
+import pandas as pd
+import torch
+from sqlalchemy import create_engine, text
+from transformers import pipeline, AutoModelForSequenceClassification, AutoTokenizer
+from langdetect import detect, DetectorFactory
+from tqdm import tqdm
+import sys
 
-# 1. 설정 및 모델 로드
-TARGET_COINS = ('BTC', 'ETH', 'SOL', 'XRP')
-KEY_WEIGHTS = {"CEO": 1.5, "SEC": 2.0, "ETF": 2.0, "Regulation": 1.5, "Breakout": 1.3}
+# 언어 감지 랜덤 시드 고정 (일관성 유지)
+DetectorFactory.seed = 0
 
-print("Fin-BERT 모델 로딩 중...")
-# Mac(M1/M2/M3)을 사용 중이시라면 device="mps"를 쓰시는 게 빠를 수 있습니다.
-# 위 에러 로그에 mps:0이 뜬 것으로 보아 아래처럼 설정하는 것이 좋습니다.
-sentiment_pipeline = pipeline("sentiment-analysis", model="ProsusAI/finbert", device="mps") 
-text_splitter = RecursiveCharacterTextSplitter(chunk_size=512, chunk_overlap=50)
+# ==========================================
+# 1. DB 설정 (본인 설정에 맞게 수정)
+# ==========================================
+DB_USER = "postgres"      
+DB_PASSWORD = "0000"  
+DB_HOST = "localhost"          
+DB_PORT = "15432"               
+DB_NAME = "app"       
 
-def process_all_data():
-    conn = psycopg2.connect(host="localhost", port=15432, user="postgres", password="0000", database="app")
-    cur = conn.cursor()
+db_url = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+try:
+    engine = create_engine(db_url)
+    connection = engine.connect()
+    print("✅ DB 연결 성공!")
+except Exception as e:
+    print(f"❌ DB 연결 실패: {e}")
+    sys.exit(1)
 
-    # [수정됨] 테이블명은 data로, 뉴스 ID는 news_id로 변경
-    tasks = [
-        ("news_data", "news_id", "description"),
-        ("community_data", "community_id", "description")
-    ]
+# ==========================================
+# 2. 맥북(MPS) 가속 장치 설정
+# ==========================================
+if torch.backends.mps.is_available():
+    device = torch.device("mps")
+    print("🍎 Apple Silicon(M1/M2/M3) GPU 가속(MPS)을 사용합니다.")
+elif torch.cuda.is_available():
+    device = torch.device("cuda")
+    print("🚀 NVIDIA GPU(CUDA)를 사용합니다.")
+else:
+    device = torch.device("cpu")
+    print("🐢 CPU를 사용합니다.")
 
-    for table_name, id_col, text_col in tasks:
-        print(f"\n>>> {table_name} 분석 시작...")
+# ==========================================
+# 3. 뉴스 데이터 처리 함수 (기존 방식 유지)
+# ==========================================
+def analyze_news_incremental():
+    table_name = "news_data"
+    id_column = "news_id"
+    model_name = "ProsusAI/finbert"
+    
+    print(f"\n======== [{table_name}] 신규 데이터 분석 시작 (FinBERT) ========")
+
+    # 1. 미처리 데이터 가져오기
+    query = f"""
+    SELECT {id_column}, title, COALESCE(description, '') as description
+    FROM {table_name}
+    WHERE sentiment_score IS NULL
+    ORDER BY {id_column} DESC;
+    """
+    
+    with engine.connect() as conn:
+        df = pd.read_sql(query, conn)
+    
+    total_rows = len(df)
+    if total_rows == 0:
+        print("   🎉 뉴스 데이터는 모두 처리되었습니다.")
+        return
+
+    print(f"👉 분석 대상(뉴스): {total_rows}개")
+
+    # 2. 모델 로드
+    try:
+        model = AutoModelForSequenceClassification.from_pretrained(model_name).to(device)
+        tokenizer = AutoTokenizer.from_pretrained(model_name)
+        classifier = pipeline("text-classification", model=model, tokenizer=tokenizer, device=device, truncation=True, max_length=512)
+    except Exception as e:
+        print(f"❌ 모델 로드 실패: {e}")
+        return
+
+    # 3. 데이터 전처리
+    df['full_text'] = df.apply(lambda row: f"{row['title']} {row['description']}".strip(), axis=1)
+    updates = []
+
+    # 4. 배치 분석
+    for i in tqdm(range(0, total_rows, 32), desc="Processing News"):
+        batch_df = df.iloc[i : i + 32]
+        texts = batch_df['full_text'].tolist()
+        ids = batch_df[id_column].tolist()
         
-        # sentiment_score가 없는 데이터만 추출
-        query = f"SELECT {id_col}, title, {text_col} FROM {table_name} WHERE sentiment_score IS NULL"
-        cur.execute(query)
-        rows = cur.fetchall()
-        
-        if not rows:
-            print(f"--- {table_name}에 처리할 데이터가 없습니다.")
+        try:
+            results = classifier(texts)
+        except Exception as e:
             continue
+        
+        for doc_id, res in zip(ids, results):
+            updates.append({
+                "id": int(doc_id),
+                "score": float(res['score']),
+                "label": str(res['label']) # positive, negative, neutral
+            })
 
-        for i, (row_id, title, content) in enumerate(rows):
-            target_text = content if content and len(content.strip()) > 0 else title
-            
-            chunks = text_splitter.split_text(target_text)
-            chunk_scores = []
+    # 5. DB 업데이트
+    if updates:
+        print(f"💾 {len(updates)}건 뉴스 데이터 저장 중...")
+        update_query = text(f"""
+            UPDATE {table_name}
+            SET sentiment_score = :score,
+                sentiment_label = :label
+            WHERE {id_column} = :id
+        """)
+        with engine.begin() as conn:
+            conn.execute(update_query, updates)
+        print("✅ 뉴스 업데이트 완료!")
 
-            for chunk in chunks:
-                res = sentiment_pipeline(chunk)[0]
+# ==========================================
+# 4. 커뮤니티 데이터 처리 함수 (Hybrid: KR/EN)
+# ==========================================
+def analyze_community_hybrid_incremental():
+    table_name = "community_data"
+    id_column = "community_id"
+    
+    print(f"\n======== [{table_name}] 신규 데이터 하이브리드 분석 시작 (KR/EN) ========")
+
+    # 1. 미처리 데이터 가져오기
+    query = f"""
+    SELECT {id_column}, title, COALESCE(description, '') as description
+    FROM {table_name}
+    WHERE sentiment_score IS NULL
+    ORDER BY {id_column} DESC;
+    """
+    
+    with engine.connect() as conn:
+        df = pd.read_sql(query, conn)
+    
+    total_rows = len(df)
+    if total_rows == 0:
+        print("   🎉 커뮤니티 데이터는 모두 처리되었습니다.")
+        return
+
+    print(f"👉 분석 대상(커뮤니티): {total_rows}개 (한국어/영어 자동 분류)")
+
+    # 2. 모델 2개 로드 (한국어 & 영어)
+    print("⏳ 모델 로딩 중... (KR-FinBert & CryptoBERT)")
+    try:
+        # 한국어 모델
+        pipe_ko = pipeline("text-classification", model="snunlp/KR-FinBert-SC", device=device, truncation=True, max_length=512)
+        # 영어 모델
+        pipe_en = pipeline("text-classification", model="ElKulako/cryptobert", device=device, truncation=True, max_length=512)
+    except Exception as e:
+        print(f"❌ 모델 로드 실패: {e}")
+        return
+
+    df['full_text'] = df.apply(lambda row: f"{row['title']} {row['description']}".strip(), axis=1)
+    updates = []
+
+    print("🌊 언어 감지 및 정밀 분석 실행 중...")
+
+    # 3. 개별 데이터 처리 (언어 감지 때문에 반복문 사용)
+    for i, row in tqdm(df.iterrows(), total=total_rows, desc="Processing Community"):
+        text_content = row['full_text']
+        doc_id = row[id_column]
+        
+        if not text_content: continue
+
+        # A. 언어 감지
+        try:
+            lang = detect(text_content) # ko, en 등
+        except:
+            lang = 'en' # 실패 시 영어 모델(이모지 등) 사용
+
+        # B. 모델 선택 및 라벨 통일
+        try:
+            if lang == 'ko':
+                # [한국어] KR-FinBert
+                res = pipe_ko(text_content)[0]
+                label = res['label'] # neutral, positive, negative
+                score = res['score']
+            else:
+                # [영어] CryptoBERT
+                res = pipe_en(text_content)[0]
+                raw_label = res['label'] # Neutral, Bullish, Bearish
                 score = res['score']
                 
-                if res['label'] == 'negative': score *= -1
-                elif res['label'] == 'neutral': score = 0
-                
-                weight = 1.0
-                for word, w_val in KEY_WEIGHTS.items():
-                    if word.lower() in chunk.lower():
-                        weight = max(weight, w_val)
-                chunk_scores.append(score * weight)
+                # 라벨 통일 (DB 저장용)
+                if raw_label == 'Bullish': label = 'positive'
+                elif raw_label == 'Bearish': label = 'negative'
+                else: label = 'neutral'
+        except:
+            continue
 
-            raw_score = sum(chunk_scores) / len(chunk_scores) if chunk_scores else 0
-            final_score = float(np.tanh(raw_score))
-            label = 'positive' if final_score > 0.1 else ('negative' if final_score < -0.1 else 'neutral')
+        updates.append({
+            "id": int(doc_id),
+            "score": float(score),
+            "label": str(label)
+        })
 
-            # 업데이트 쿼리
-            update_query = f"UPDATE {table_name} SET sentiment_score = %s, sentiment_label = %s WHERE {id_col} = %s"
-            cur.execute(update_query, (final_score, label, row_id))
+    # 4. DB 업데이트
+    if updates:
+        print(f"💾 {len(updates)}건 커뮤니티 데이터 저장 중...")
+        update_query = text(f"""
+            UPDATE {table_name}
+            SET sentiment_score = :score,
+                sentiment_label = :label
+            WHERE {id_column} = :id
+        """)
+        with engine.begin() as conn:
+            conn.execute(update_query, updates)
+        print("✅ 커뮤니티 업데이트 완료!")
 
-            if (i + 1) % 100 == 0:
-                conn.commit()
-                print(f"[{table_name}] {i + 1}/{len(rows)} 완료...")
-
-        conn.commit()
-        print(f">>> {table_name} 전수 처리 완료!")
-
-    cur.close()
-    conn.close()
-
+# ==========================================
+# 5. 실행 (뉴스 -> 커뮤니티 순서)
+# ==========================================
 if __name__ == "__main__":
-    process_all_data()
+    # 1. 뉴스 데이터 처리
+    analyze_news_incremental()
+    
+    # 2. 커뮤니티 데이터 처리 (Hybrid)
+    analyze_community_hybrid_incremental()
+    
+    print("\n🎉 모든 신규 데이터 처리가 완료되었습니다!")
+    connection.close()
