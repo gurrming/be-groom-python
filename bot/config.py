@@ -6,22 +6,22 @@ load_dotenv()
 
 # DB 연결 정보 (기존 설정 활용)
 
-def get_db_connection():
-    return psycopg2.connect(
-        host="localhost", port="15432",
-        database="app", user="postgres", password="0000"
-    )
-
 # def get_db_connection():
 #     return psycopg2.connect(
-#         host = "heartbit-db.c3qieeu84ouk.ap-southeast-2.rds.amazonaws.com",
-#         port = "5432",
-#         database = "heartbit",
-#         user = "postgre",
-#         password = "heartbit,,1234",
-#         connect_timeout = 5,
-#         options = "-c client_encoding=UTF8"
+#         host="localhost", port="15432",
+#         database="app", user="postgres", password="0000"
 #     )
+
+def get_db_connection():
+    return psycopg2.connect(
+        host = "heartbit-db-k.ct8oi6y6qlmp.ap-northeast-2.rds.amazonaws.com",
+        port = "5432",
+        database = "heartbit",
+        user = "postgre",
+        password = "heartbit,,1234",
+        connect_timeout = 5,
+        options = "-c client_encoding=UTF8"
+    )
 
 
 def load_categories_from_db():

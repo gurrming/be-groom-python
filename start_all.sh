@@ -24,6 +24,7 @@ sleep 2
 
 # 3. 로그 폴더 생성
 mkdir -p logs
+rm -f logs/*.log
 PYTHON_CMD="venv/bin/python -u"
 
 # 4. 각 컴포넌트 백그라운드 실행
@@ -37,7 +38,7 @@ echo "▶️ 3. 감성 분석기 시작..."
 nohup $PYTHON_CMD src/analysis/sentiment_analyzer.py > logs/sentiment.log 2>&1 &
 
 echo "▶️ 4. AI 분석기(RAG Agent) 시작..."
-nohup $PYTHON_CMD src/analysis/main.py > logs/agent.log 2>&1 &
+nohup $PYTHON_CMD src/main.py > logs/agent.log 2>&1 &
 
 # 5. 실행 상태 확인
 sleep 3
