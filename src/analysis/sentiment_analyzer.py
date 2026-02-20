@@ -1,16 +1,16 @@
 import pandas as pd
 import torch
 from sqlalchemy import create_engine, text
-from transformers import pipeline, AutoModelForSequenceClassification, AutoTokenizer
-from langdetect import detect, DetectorFactory
+from transformers import pipeline
 from tqdm import tqdm
 import sys
-
-# 언어 감지 랜덤 시드 고정 (일관성 유지)
-DetectorFactory.seed = 0
+import re
+import schedule
+import time
+from datetime import datetime
 
 # ==========================================
-# 1. DB 설정 (본인 설정에 맞게 수정)
+# 1. 설정 및 DB 연결 (Global)
 # ==========================================
 DB_USER = "postgres"      
 DB_PASSWORD = "0000"  
@@ -19,203 +19,218 @@ DB_PORT = "15432"
 DB_NAME = "app"       
 
 db_url = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+
+# 엔진은 전역으로 한 번만 생성 (매번 연결하면 부하 발생)
 try:
     engine = create_engine(db_url)
-    connection = engine.connect()
-    print("✅ DB 연결 성공!")
+    print("✅ [Init] DB 연결 성공!")
 except Exception as e:
-    print(f"❌ DB 연결 실패: {e}")
+    print(f"❌ [Init] DB 연결 실패: {e}")
     sys.exit(1)
 
-# ==========================================
-# 2. 맥북(MPS) 가속 장치 설정
-# ==========================================
+# MPS(Mac) / CUDA / CPU 설정
 if torch.backends.mps.is_available():
     device = torch.device("mps")
-    print("🍎 Apple Silicon(M1/M2/M3) GPU 가속(MPS)을 사용합니다.")
+    print("🍎 Apple MPS 가속을 사용합니다.")
 elif torch.cuda.is_available():
     device = torch.device("cuda")
-    print("🚀 NVIDIA GPU(CUDA)를 사용합니다.")
+    print("🚀 NVIDIA GPU를 사용합니다.")
 else:
     device = torch.device("cpu")
     print("🐢 CPU를 사용합니다.")
 
 # ==========================================
-# 3. 뉴스 데이터 처리 함수 (기존 방식 유지)
+# 2. 사전 및 규칙 정의
 # ==========================================
-def analyze_news_incremental():
-    table_name = "news_data"
-    id_column = "news_id"
-    model_name = "ProsusAI/finbert"
-    
-    print(f"\n======== [{table_name}] 신규 데이터 분석 시작 (FinBERT) ========")
+SLANG_DICT = {
+    "떡락": " HUGE CRASH ", "폭락": " PLUMMET ", "나락": " HELL DUMP ",
+    "한강": " SUICIDE DEPRESSION ", "돔황챠": " RUN AWAY ", "돔황차": " RUN AWAY ",
+    "탈출": " ESCAPE ", "손절": " PANIC SELL ", "설거지": " SCAM DUMP ",
+    "흑우": " VICTIM ", "물렸": " TRAPPED LOSS ", "상폐": " DELISTING ",
+    "스캠": " SCAM ", "망했": " RUINED ", "무섭다": " FEAR ", "공포": " FEAR ",
+    "떨린다": " FEAR ", "drained": " HACKED ", "털렸다": " HACKED ", "해킹": " HACKED ",
+    "떡상": " HUGE PUMP ", "불장": " BULL MARKET ", "투더문": " MOONING ",
+    "가즈아": " TO THE MOON ", "존버": " HODL ", "홀딩": " HODL ",
+    "졸업": " RETIRE RICH ", "익절": " TAKE PROFIT ", "반등": " REBOUND ",
+    "말아올려": " PUMP UP ", "풀매수": " ALL IN BUY ", "영끌": " ALL IN BUY ",
+    "롱": " LONG POSITION "
+}
 
-    # 1. 미처리 데이터 가져오기
-    query = f"""
-    SELECT {id_column}, title, COALESCE(description, '') as description
-    FROM {table_name}
-    WHERE sentiment_score IS NULL
-    ORDER BY {id_column} DESC;
-    """
+HARD_RULES = {
+    "negative": [
+        "상장폐지", "상폐", "해킹당함", "해킹 당함", "drained", "hacked", 
+        "rug pull", "러그풀", "출금 중단", "입출금 중단", "구속", "체포"
+    ],
+    "positive": []
+}
+
+# ==========================================
+# 3. 모델 로드 (최초 1회만 실행)
+# ==========================================
+print("⏳ 모델 로딩 중... (이 과정은 한 번만 실행됩니다)")
+pipe_news = pipeline("text-classification", model="ProsusAI/finbert", device=device, truncation=True, max_length=512)
+pipe_trans = pipeline("translation", model="Helsinki-NLP/opus-mt-ko-en", device=device, truncation=True, max_length=512)
+pipe_crypto = pipeline("text-classification", model="ElKulako/cryptobert", device=device, truncation=True, max_length=512)
+print("✅ 모델 로딩 완료!")
+
+# ==========================================
+# 4. 헬퍼 함수
+# ==========================================
+def apply_hard_rules(text):
+    for kw in HARD_RULES["negative"]:
+        if kw in text: return 0.99, "negative"
+    for kw in HARD_RULES["positive"]:
+        if kw in text: return 0.99, "positive"
+    return None, None
+
+def inject_slang(text):
+    for slang, eng in SLANG_DICT.items():
+        if slang in text: text = text.replace(slang, eng)
+    return text
+
+def has_korean(text):
+    return bool(re.search("[가-힣]", text))
+
+def save_to_db(table, id_col, data):
+    """DB 일괄 업데이트"""
+    if not data: return
+    print(f"   💾 {len(data)}건 [{table}] 점수 저장 중...")
     
+    query = text(f"""
+        UPDATE {table}
+        SET sentiment_score = :score, sentiment_label = :label
+        WHERE {id_col} = :id
+    """)
+    
+    try:
+        with engine.begin() as conn:
+            conn.execute(query, data)
+        print("   ✅ 저장 완료!")
+    except Exception as e:
+        print(f"   ❌ 저장 실패: {e}")
+
+# ==========================================
+# 5. 메인 분석 함수
+# ==========================================
+def analyze_news():
+    query = """
+    SELECT news_id, title, COALESCE(description, '') as description
+    FROM news_data
+    WHERE sentiment_score IS NULL
+    ORDER BY news_id DESC;
+    """
     with engine.connect() as conn:
         df = pd.read_sql(query, conn)
     
-    total_rows = len(df)
-    if total_rows == 0:
-        print("   🎉 뉴스 데이터는 모두 처리되었습니다.")
-        return
+    if len(df) == 0:
+        return # 조용히 리턴
 
-    print(f"👉 분석 대상(뉴스): {total_rows}개")
-
-    # 2. 모델 로드
-    try:
-        model = AutoModelForSequenceClassification.from_pretrained(model_name).to(device)
-        tokenizer = AutoTokenizer.from_pretrained(model_name)
-        classifier = pipeline("text-classification", model=model, tokenizer=tokenizer, device=device, truncation=True, max_length=512)
-    except Exception as e:
-        print(f"❌ 모델 로드 실패: {e}")
-        return
-
-    # 3. 데이터 전처리
+    print(f"\n📰 [NEWS] {len(df)}건 신규 분석 시작...")
     df['full_text'] = df.apply(lambda row: f"{row['title']} {row['description']}".strip(), axis=1)
+    
     updates = []
+    batch_size = 32
 
-    # 4. 배치 분석
-    for i in tqdm(range(0, total_rows, 32), desc="Processing News"):
-        batch_df = df.iloc[i : i + 32]
-        texts = batch_df['full_text'].tolist()
-        ids = batch_df[id_column].tolist()
+    for i in range(0, len(df), batch_size):
+        batch = df.iloc[i : i + batch_size]
+        texts = batch['full_text'].tolist()
+        ids = batch['news_id'].tolist()
         
         try:
-            results = classifier(texts)
+            results = pipe_news(texts)
+            for doc_id, res in zip(ids, results):
+                updates.append({
+                    "id": int(doc_id),
+                    "score": float(res['score']),
+                    "label": str(res['label'])
+                })
         except Exception as e:
+            print(f"   ⚠️ 배치 처리 에러: {e}")
             continue
-        
-        for doc_id, res in zip(ids, results):
+
+    if updates:
+        save_to_db("news_data", "news_id", updates)
+
+def analyze_community():
+    query = """
+    SELECT community_id, title, COALESCE(description, '') as description
+    FROM community_data
+    WHERE sentiment_score IS NULL
+    ORDER BY community_id DESC;
+    """
+    with engine.connect() as conn:
+        df = pd.read_sql(query, conn)
+    
+    if len(df) == 0:
+        return
+
+    print(f"\n👽 [COMMUNITY] {len(df)}건 신규 분석 시작...")
+    df['full_text'] = df.apply(lambda row: f"{row['title']} {row['description']}".strip(), axis=1)
+    
+    updates = []
+    
+    for idx, row in tqdm(df.iterrows(), total=len(df), desc="Processing"):
+        doc_id = row['community_id']
+        text_content = row['full_text']
+        if not text_content: continue
+
+        # 1. Hard Rule
+        hr_score, hr_label = apply_hard_rules(text_content)
+        if hr_label:
+            updates.append({"id": doc_id, "score": hr_score, "label": hr_label})
+            continue
+
+        # 2. Slang Injection
+        text_content = inject_slang(text_content)
+
+        # 3. Translation
+        final_text = text_content
+        if has_korean(text_content):
+            try:
+                trans_res = pipe_trans(text_content[:512])
+                final_text = trans_res[0]['translation_text']
+            except: pass
+
+        # 4. AI Analysis
+        try:
+            res = pipe_crypto(final_text[:512])[0]
+            raw_label = res['label']
+            if raw_label == 'Bullish': label = 'positive'
+            elif raw_label == 'Bearish': label = 'negative'
+            else: label = 'neutral'
+            
             updates.append({
                 "id": int(doc_id),
                 "score": float(res['score']),
-                "label": str(res['label']) # positive, negative, neutral
+                "label": label
             })
+        except: continue
 
-    # 5. DB 업데이트
     if updates:
-        print(f"💾 {len(updates)}건 뉴스 데이터 저장 중...")
-        update_query = text(f"""
-            UPDATE {table_name}
-            SET sentiment_score = :score,
-                sentiment_label = :label
-            WHERE {id_column} = :id
-        """)
-        with engine.begin() as conn:
-            conn.execute(update_query, updates)
-        print("✅ 뉴스 업데이트 완료!")
+        save_to_db("community_data", "community_id", updates)
 
 # ==========================================
-# 4. 커뮤니티 데이터 처리 함수 (Hybrid: KR/EN)
+# 6. 스케줄러 Job 및 실행
 # ==========================================
-def analyze_community_hybrid_incremental():
-    table_name = "community_data"
-    id_column = "community_id"
-    
-    print(f"\n======== [{table_name}] 신규 데이터 하이브리드 분석 시작 (KR/EN) ========")
-
-    # 1. 미처리 데이터 가져오기
-    query = f"""
-    SELECT {id_column}, title, COALESCE(description, '') as description
-    FROM {table_name}
-    WHERE sentiment_score IS NULL
-    ORDER BY {id_column} DESC;
-    """
-    
-    with engine.connect() as conn:
-        df = pd.read_sql(query, conn)
-    
-    total_rows = len(df)
-    if total_rows == 0:
-        print("   🎉 커뮤니티 데이터는 모두 처리되었습니다.")
-        return
-
-    print(f"👉 분석 대상(커뮤니티): {total_rows}개 (한국어/영어 자동 분류)")
-
-    # 2. 모델 2개 로드 (한국어 & 영어)
-    print("⏳ 모델 로딩 중... (KR-FinBert & CryptoBERT)")
+def job():
+    print(f"\n[🔄 분석 사이클 시작] {datetime.now().strftime('%H:%M:%S')}")
     try:
-        # 한국어 모델
-        pipe_ko = pipeline("text-classification", model="snunlp/KR-FinBert-SC", device=device, truncation=True, max_length=512)
-        # 영어 모델
-        pipe_en = pipeline("text-classification", model="ElKulako/cryptobert", device=device, truncation=True, max_length=512)
+        analyze_news()
+        analyze_community()
+        print(f"[✅ 사이클 종료] 대기 모드로 전환...")
     except Exception as e:
-        print(f"❌ 모델 로드 실패: {e}")
-        return
+        print(f"[❌ 사이클 에러] {e}")
 
-    df['full_text'] = df.apply(lambda row: f"{row['title']} {row['description']}".strip(), axis=1)
-    updates = []
-
-    print("🌊 언어 감지 및 정밀 분석 실행 중...")
-
-    # 3. 개별 데이터 처리 (언어 감지 때문에 반복문 사용)
-    for i, row in tqdm(df.iterrows(), total=total_rows, desc="Processing Community"):
-        text_content = row['full_text']
-        doc_id = row[id_column]
-        
-        if not text_content: continue
-
-        # A. 언어 감지
-        try:
-            lang = detect(text_content) # ko, en 등
-        except:
-            lang = 'en' # 실패 시 영어 모델(이모지 등) 사용
-
-        # B. 모델 선택 및 라벨 통일
-        try:
-            if lang == 'ko':
-                # [한국어] KR-FinBert
-                res = pipe_ko(text_content)[0]
-                label = res['label'] # neutral, positive, negative
-                score = res['score']
-            else:
-                # [영어] CryptoBERT
-                res = pipe_en(text_content)[0]
-                raw_label = res['label'] # Neutral, Bullish, Bearish
-                score = res['score']
-                
-                # 라벨 통일 (DB 저장용)
-                if raw_label == 'Bullish': label = 'positive'
-                elif raw_label == 'Bearish': label = 'negative'
-                else: label = 'neutral'
-        except:
-            continue
-
-        updates.append({
-            "id": int(doc_id),
-            "score": float(score),
-            "label": str(label)
-        })
-
-    # 4. DB 업데이트
-    if updates:
-        print(f"💾 {len(updates)}건 커뮤니티 데이터 저장 중...")
-        update_query = text(f"""
-            UPDATE {table_name}
-            SET sentiment_score = :score,
-                sentiment_label = :label
-            WHERE {id_column} = :id
-        """)
-        with engine.begin() as conn:
-            conn.execute(update_query, updates)
-        print("✅ 커뮤니티 업데이트 완료!")
-
-# ==========================================
-# 5. 실행 (뉴스 -> 커뮤니티 순서)
-# ==========================================
 if __name__ == "__main__":
-    # 1. 뉴스 데이터 처리
-    analyze_news_incremental()
+    print("🚀 감성 분석 에이전트 가동 (10분 주기)")
+    print("   -> 메모리에 모델 적재 완료. 대기 중...")
     
-    # 2. 커뮤니티 데이터 처리 (Hybrid)
-    analyze_community_hybrid_incremental()
+    # 1. 실행 즉시 한 번 처리
+    job()
     
-    print("\n🎉 모든 신규 데이터 처리가 완료되었습니다!")
-    connection.close()
+    # 2. 10분마다 반복 스케줄링
+    schedule.every(30).minutes.do(job)
+    
+    while True:
+        schedule.run_pending()
+        time.sleep(1)

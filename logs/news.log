@@ -1,0 +1,322 @@
+⏳ 뉴스 수집기 가동
+
+📡 [뉴스 수집 시작] (14:47:09)
+   🔎 [Google News] 실시간 검색 중...
+      ✅ [SOL] 7건 저장 (Google)
+      ✅ [BTC] 7건 저장 (Google)
+      ✅ [DOGE] 12건 저장 (Google)
+      ✅ [ETH] 4건 저장 (Google)
+      ✅ [DOT] 13건 저장 (Google)
+      ✅ [ADA] 2건 저장 (Google)
+      ✅ [LINK] 5건 저장 (Google)
+      ✅ [XRP] 20건 저장 (Google)
+   🔎 [Static RSS] 고정 사이트 스캔 중...
+      ✅ [CoinTelegraph] 1건 저장
+✨ 전체 수집 완료. 총 71건 신규 저장.
+
+📡 [뉴스 수집 시작] (15:17:23)
+   🔎 [Google News] 실시간 검색 중...
+      ✅ [SOL] 4건 저장 (Google)
+      ✅ [BTC] 4건 저장 (Google)
+      ✅ [DOGE] 1건 저장 (Google)
+      ✅ [ETH] 2건 저장 (Google)
+      ✅ [DOT] 2건 저장 (Google)
+      ✅ [ADA] 7건 저장 (Google)
+      ✅ [XRP] 6건 저장 (Google)
+   🔎 [Static RSS] 고정 사이트 스캔 중...
+      ✅ [NewsBTC] 1건 저장
+✨ 전체 수집 완료. 총 27건 신규 저장.
+
+📡 [뉴스 수집 시작] (15:47:37)
+   🔎 [Google News] 실시간 검색 중...
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+   🔎 [Static RSS] 고정 사이트 스캔 중...
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+✨ 전체 수집 완료. 총 0건 신규 저장.
+
+📡 [뉴스 수집 시작] (16:17:45)
+   🔎 [Google News] 실시간 검색 중...
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+   🔎 [Static RSS] 고정 사이트 스캔 중...
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+✨ 전체 수집 완료. 총 0건 신규 저장.
+
+📡 [뉴스 수집 시작] (16:47:53)
+   🔎 [Google News] 실시간 검색 중...
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+   🔎 [Static RSS] 고정 사이트 스캔 중...
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+✨ 전체 수집 완료. 총 0건 신규 저장.
+
+📡 [뉴스 수집 시작] (17:18:01)
+   🔎 [Google News] 실시간 검색 중...
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+   🔎 [Static RSS] 고정 사이트 스캔 중...
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+✨ 전체 수집 완료. 총 0건 신규 저장.
+
+📡 [뉴스 수집 시작] (17:48:11)
+   🔎 [Google News] 실시간 검색 중...
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+   🔎 [Static RSS] 고정 사이트 스캔 중...
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+✨ 전체 수집 완료. 총 0건 신규 저장.
+
+📡 [뉴스 수집 시작] (18:18:18)
+   🔎 [Google News] 실시간 검색 중...
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+   🔎 [Static RSS] 고정 사이트 스캔 중...
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+✨ 전체 수집 완료. 총 0건 신규 저장.
+
+📡 [뉴스 수집 시작] (18:58:32)
+   🔎 [Google News] 실시간 검색 중...
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+   🔎 [Static RSS] 고정 사이트 스캔 중...
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
+❌ DB 에러: relation "public.news_data" does not exist
+LINE 2:                 INSERT INTO public.news_data
+                                    ^
+
