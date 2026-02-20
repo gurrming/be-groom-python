@@ -8,6 +8,7 @@ import re
 import schedule
 import time
 from datetime import datetime
+from qdrant_client import QdrantClient
 
 # ==========================================
 # 1. 설정 및 DB 연결 (Global)
@@ -27,6 +28,9 @@ try:
 except Exception as e:
     print(f"❌ [Init] DB 연결 실패: {e}")
     sys.exit(1)
+
+qdrant = QdrantClient(url="http://localhost:6333")
+print("✅ [Init] Qdrant 연결 성공!")
 
 # MPS(Mac) / CUDA / CPU 설정
 if torch.backends.mps.is_available():
@@ -92,23 +96,32 @@ def has_korean(text):
     return bool(re.search("[가-힣]", text))
 
 def save_to_db(table, id_col, data):
-    """DB 일괄 업데이트"""
     if not data: return
     print(f"   💾 {len(data)}건 [{table}] 점수 저장 중...")
     
-    query = text(f"""
-        UPDATE {table}
-        SET sentiment_score = :score, sentiment_label = :label
-        WHERE {id_col} = :id
-    """)
-    
+    # 트랜잭션을 짧게 가져가기 위해 개별 업데이트 혹은 작은 단위로 처리
     try:
-        with engine.begin() as conn:
-            conn.execute(query, data)
-        print("   ✅ 저장 완료!")
+        with engine.connect() as conn: # begin() 대신 connect() 사용
+            for item in data:
+                query = text(f"""
+                    UPDATE {table}
+                    SET sentiment_score = :score, sentiment_label = :label
+                    WHERE {id_col} = :id
+                """)
+                conn.execute(query, {"score": item["score"], "label": item["label"], "id": item["id"]})
+                
+                # Qdrant 업데이트 (기존 코드 유지)
+                collection_name = "news_collection" if "news" in table else "community_collection"
+                qdrant.set_payload(
+                    collection_name=collection_name,
+                    payload={"sentiment": item["score"]},
+                    points=[item["id"]]
+                )
+            conn.commit() # 마지막에 한 번에 커밋
+        print("   ✅ Postgres & Qdrant 점수 동기화 완료!")
     except Exception as e:
         print(f"   ❌ 저장 실패: {e}")
-
+        
 # ==========================================
 # 5. 메인 분석 함수
 # ==========================================

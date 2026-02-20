@@ -10,28 +10,25 @@ class QdrantSearcher:
         self.model = SentenceTransformer('intfloat/multilingual-e5-small', device=self.device)
         self.client = QdrantClient(url="http://localhost:6333")
 
+    # searcher.py 파일의 search_similar_contexts 함수 일부분 수정
     def search_similar_contexts(self, query_text, category_id, limit=3):
-        # E5 모델 지침: 검색어 앞에 'query: ' 추가
         query_vector = self.model.encode(f"query: {query_text}").tolist()
-        
-        # 특정 종목 필터 설정
         search_filter = Filter(must=[FieldCondition(key="category_id", match=MatchValue(value=category_id))])
         
         results = []
         for col in ["news_collection", "community_collection"]:
-            search_res = self.client.search(
+            search_res = self.client.query_points(
                 collection_name=col,
-                query_vector=query_vector,
+                query=query_vector,
                 query_filter=search_filter,
                 limit=limit
-            )
-            # 출처 정보를 포함하여 ID 저장
+            ).points  # points 리스트 추출
+            
             for r in search_res:
+                # r.payload를 통해 실제 데이터에 접근해야 합니다.
                 results.append({
                     "id": r.id,
                     "source": "news" if "news" in col else "community",
                     "score": r.score
                 })
-        
-        # 유사도 순으로 정렬 후 상위 결과 반환
         return sorted(results, key=lambda x: x['score'], reverse=True)[:limit]

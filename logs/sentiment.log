@@ -1,4 +1,5 @@
 ✅ [Init] DB 연결 성공!
+✅ [Init] Qdrant 연결 성공!
 🍎 Apple MPS 가속을 사용합니다.
 ⏳ 모델 로딩 중... (이 과정은 한 번만 실행됩니다)
 Device set to use mps
@@ -8,400 +9,127 @@ Device set to use mps
 🚀 감성 분석 에이전트 가동 (10분 주기)
    -> 메모리에 모델 적재 완료. 대기 중...
 
-[🔄 분석 사이클 시작] 14:47:17
-
-📰 [NEWS] 71건 신규 분석 시작...
-   💾 71건 [news_data] 점수 저장 중...
-   ✅ 저장 완료!
+[🔄 분석 사이클 시작] 15:45:09
 [✅ 사이클 종료] 대기 모드로 전환...
 
-[🔄 분석 사이클 시작] 15:17:20
+[🔄 분석 사이클 시작] 16:15:10
+
+📰 [NEWS] 12건 신규 분석 시작...
+   💾 12건 [news_data] 점수 저장 중...
+   ✅ Postgres & Qdrant 점수 동기화 완료!
+
+👽 [COMMUNITY] 2건 신규 분석 시작...
+Processing:   0%|          | 0/2 [00:00<?, ?it/s]Processing:  50%|█████     | 1/2 [00:00<00:00,  3.04it/s]Processing: 100%|██████████| 2/2 [00:00<00:00,  4.91it/s]
+   💾 2건 [community_data] 점수 저장 중...
+   ✅ Postgres & Qdrant 점수 동기화 완료!
+[✅ 사이클 종료] 대기 모드로 전환...
+
+[🔄 분석 사이클 시작] 16:45:14
+
+📰 [NEWS] 31건 신규 분석 시작...
+   💾 31건 [news_data] 점수 저장 중...
+   ✅ Postgres & Qdrant 점수 동기화 완료!
+
+👽 [COMMUNITY] 2건 신규 분석 시작...
+Processing:   0%|          | 0/2 [00:00<?, ?it/s]Processing: 100%|██████████| 2/2 [00:00<00:00, 13.51it/s]Processing: 100%|██████████| 2/2 [00:00<00:00, 13.50it/s]
+   💾 2건 [community_data] 점수 저장 중...
+   ✅ Postgres & Qdrant 점수 동기화 완료!
+[✅ 사이클 종료] 대기 모드로 전환...
+
+[🔄 분석 사이클 시작] 17:15:16
+
+📰 [NEWS] 45건 신규 분석 시작...
+   💾 45건 [news_data] 점수 저장 중...
+   ✅ Postgres & Qdrant 점수 동기화 완료!
 
 👽 [COMMUNITY] 1건 신규 분석 시작...
-Processing:   0%|          | 0/1 [00:00<?, ?it/s]Processing: 100%|██████████| 1/1 [00:00<00:00,  2.43it/s]Processing: 100%|██████████| 1/1 [00:00<00:00,  2.43it/s]
+Processing:   0%|          | 0/1 [00:00<?, ?it/s]Processing: 100%|██████████| 1/1 [00:00<00:00, 14.53it/s]
    💾 1건 [community_data] 점수 저장 중...
-   ✅ 저장 완료!
+   ✅ Postgres & Qdrant 점수 동기화 완료!
 [✅ 사이클 종료] 대기 모드로 전환...
 
-[🔄 분석 사이클 시작] 15:47:21
-[❌ 사이클 에러] Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+[🔄 분석 사이클 시작] 17:51:53
 
-[🔄 분석 사이클 시작] 16:17:22
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
+📰 [NEWS] 40건 신규 분석 시작...
+   💾 40건 [news_data] 점수 저장 중...
+   ✅ Postgres & Qdrant 점수 동기화 완료!
 
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
+👽 [COMMUNITY] 5건 신규 분석 시작...
+Processing:   0%|          | 0/5 [00:00<?, ?it/s]Processing:  40%|████      | 2/5 [00:00<00:00, 13.89it/s]Processing:  80%|████████  | 4/5 [00:00<00:00, 14.79it/s]Processing: 100%|██████████| 5/5 [00:00<00:00, 15.02it/s]
+   💾 5건 [community_data] 점수 저장 중...
+   ✅ Postgres & Qdrant 점수 동기화 완료!
+[✅ 사이클 종료] 대기 모드로 전환...
 
-[🔄 분석 사이클 시작] 16:47:22
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
+[🔄 분석 사이클 시작] 18:21:55
 
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
+📰 [NEWS] 52건 신규 분석 시작...
+   💾 52건 [news_data] 점수 저장 중...
+   ✅ Postgres & Qdrant 점수 동기화 완료!
+[✅ 사이클 종료] 대기 모드로 전환...
 
-[🔄 분석 사이클 시작] 17:17:23
-[❌ 사이클 에러] Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+[🔄 분석 사이클 시작] 19:00:16
 
-[🔄 분석 사이클 시작] 17:47:23
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
+📰 [NEWS] 47건 신규 분석 시작...
+   💾 47건 [news_data] 점수 저장 중...
+   ✅ Postgres & Qdrant 점수 동기화 완료!
+[✅ 사이클 종료] 대기 모드로 전환...
 
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
+[🔄 분석 사이클 시작] 19:33:28
+[✅ 사이클 종료] 대기 모드로 전환...
 
-[🔄 분석 사이클 시작] 18:17:24
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
+[🔄 분석 사이클 시작] 20:13:04
 
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
+📰 [NEWS] 122건 신규 분석 시작...
+   💾 122건 [news_data] 점수 저장 중...
+   ✅ Postgres & Qdrant 점수 동기화 완료!
 
-[🔄 분석 사이클 시작] 18:58:32
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
+👽 [COMMUNITY] 3건 신규 분석 시작...
+Processing:   0%|          | 0/3 [00:00<?, ?it/s]Processing:  67%|██████▋   | 2/3 [00:00<00:00, 14.13it/s]Processing: 100%|██████████| 3/3 [00:00<00:00, 11.48it/s]
+   💾 3건 [community_data] 점수 저장 중...
+   ✅ Postgres & Qdrant 점수 동기화 완료!
+[✅ 사이클 종료] 대기 모드로 전환...
 
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
+[🔄 분석 사이클 시작] 20:57:30
 
-[🔄 분석 사이클 시작] 19:28:40
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
+📰 [NEWS] 1건 신규 분석 시작...
+   💾 1건 [news_data] 점수 저장 중...
+   ✅ Postgres & Qdrant 점수 동기화 완료!
 
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
+👽 [COMMUNITY] 4건 신규 분석 시작...
+Processing:   0%|          | 0/4 [00:00<?, ?it/s]Processing:  50%|█████     | 2/4 [00:00<00:00, 15.18it/s]Processing: 100%|██████████| 4/4 [00:00<00:00, 12.58it/s]Processing: 100%|██████████| 4/4 [00:00<00:00, 12.91it/s]
+   💾 4건 [community_data] 점수 저장 중...
+   ✅ Postgres & Qdrant 점수 동기화 완료!
+[✅ 사이클 종료] 대기 모드로 전환...
 
-[🔄 분석 사이클 시작] 19:58:41
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
+[🔄 분석 사이클 시작] 21:41:55
+[✅ 사이클 종료] 대기 모드로 전환...
 
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
+[🔄 분석 사이클 시작] 22:14:49
+[✅ 사이클 종료] 대기 모드로 전환...
 
-[🔄 분석 사이클 시작] 20:28:42
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
+[🔄 분석 사이클 시작] 23:03:29
+[✅ 사이클 종료] 대기 모드로 전환...
 
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
+[🔄 분석 사이클 시작] 23:33:29
 
-[🔄 분석 사이클 시작] 20:58:42
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
+👽 [COMMUNITY] 12건 신규 분석 시작...
+Processing:   0%|          | 0/12 [00:00<?, ?it/s]Processing:   8%|▊         | 1/12 [00:00<00:03,  2.92it/s]Processing:  17%|█▋        | 2/12 [00:00<00:02,  4.67it/s]Processing:  33%|███▎      | 4/12 [00:00<00:00,  8.87it/s]Processing:  50%|█████     | 6/12 [00:00<00:00, 10.44it/s]Processing:  75%|███████▌  | 9/12 [00:00<00:00, 13.88it/s]Processing:  92%|█████████▏| 11/12 [00:00<00:00, 14.73it/s]Processing: 100%|██████████| 12/12 [00:01<00:00, 11.62it/s]
+   💾 12건 [community_data] 점수 저장 중...
+   ✅ Postgres & Qdrant 점수 동기화 완료!
+[✅ 사이클 종료] 대기 모드로 전환...
 
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
+[🔄 분석 사이클 시작] 00:03:31
 
-[🔄 분석 사이클 시작] 21:28:43
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
+👽 [COMMUNITY] 4건 신규 분석 시작...
+Processing:   0%|          | 0/4 [00:00<?, ?it/s]Processing:  25%|██▌       | 1/4 [00:00<00:00,  4.33it/s]Processing:  50%|█████     | 2/4 [00:00<00:00,  6.10it/s]Processing: 100%|██████████| 4/4 [00:00<00:00,  9.32it/s]
+   💾 4건 [community_data] 점수 저장 중...
+   ✅ Postgres & Qdrant 점수 동기화 완료!
+[✅ 사이클 종료] 대기 모드로 전환...
 
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
+[🔄 분석 사이클 시작] 00:33:32
 
-[🔄 분석 사이클 시작] 21:58:44
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
-
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-
-[🔄 분석 사이클 시작] 22:41:10
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
-
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-
-[🔄 분석 사이클 시작] 23:16:07
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
-
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-
-[🔄 분석 사이클 시작] 23:49:02
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
-
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-
-[🔄 분석 사이클 시작] 00:22:45
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
-
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-
-[🔄 분석 사이클 시작] 00:57:08
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
-
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-
-[🔄 분석 사이클 시작] 01:41:42
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
-
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-
-[🔄 분석 사이클 시작] 02:27:01
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
-
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-
-[🔄 분석 사이클 시작] 03:00:17
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
-
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-
-[🔄 분석 사이클 시작] 03:44:28
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
-
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-
-[🔄 분석 사이클 시작] 04:28:49
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
-
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-
-[🔄 분석 사이클 시작] 05:00:54
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
-
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-
-[🔄 분석 사이클 시작] 05:43:43
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
-
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-
-[🔄 분석 사이클 시작] 06:28:38
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
-
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-
-[🔄 분석 사이클 시작] 07:01:45
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
-
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-
-[🔄 분석 사이클 시작] 07:47:24
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
-
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-
-[🔄 분석 사이클 시작] 08:17:50
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
-
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-
-[🔄 분석 사이클 시작] 08:50:23
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
-
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-
-[🔄 분석 사이클 시작] 09:20:24
-[❌ 사이클 에러] (psycopg2.errors.UndefinedTable) relation "news_data" does not exist
-LINE 3:     FROM news_data
-                 ^
-
-[SQL: 
-    SELECT news_id, title, COALESCE(description, '') as description
-    FROM news_data
-    WHERE sentiment_score IS NULL
-    ORDER BY news_id DESC;
-    ]
-(Background on this error at: https://sqlalche.me/e/20/f405)
+👽 [COMMUNITY] 7건 신규 분석 시작...
+Processing:   0%|          | 0/7 [00:00<?, ?it/s]Processing:  14%|█▍        | 1/7 [00:00<00:02,  2.79it/s]Processing:  43%|████▎     | 3/7 [00:00<00:00,  6.38it/s]Processing:  71%|███████▏  | 5/7 [00:00<00:00,  8.73it/s]Processing: 100%|██████████| 7/7 [00:00<00:00,  9.47it/s]
+   💾 7건 [community_data] 점수 저장 중...
+   ✅ Postgres & Qdrant 점수 동기화 완료!
+[✅ 사이클 종료] 대기 모드로 전환...

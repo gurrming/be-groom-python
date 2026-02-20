@@ -1,7 +1,10 @@
 import schedule
 import time
 from datetime import datetime
-from generator import ReportGenerator
+from dotenv import load_dotenv
+from agent.generator import ReportGenerator
+
+load_dotenv()
 
 # 기존 DB 설정 및 타겟 코인 정보
 DB_CONFIG = {
@@ -10,10 +13,10 @@ DB_CONFIG = {
 }
 
 TARGET_COINS = [
-    {"ticker": "KRW-BTC", "id": 1, "name": "비트코인", "symbol": "BTC"},
-    {"ticker": "KRW-ETH", "id": 2, "name": "이더리움", "symbol": "ETH"},
-    {"ticker": "KRW-SOL", "id": 3, "name": "솔라나",   "symbol": "SOL"},
-    {"ticker": "KRW-XRP", "id": 4, "name": "리플",     "symbol": "XRP"}
+    {"ticker": "KRW-BTC", "id": 223, "name": "비트코인", "symbol": "BTC"},
+    {"ticker": "KRW-ETH", "id": 80, "name": "이더리움", "symbol": "ETH"},
+    {"ticker": "KRW-SOL", "id": 198, "name": "솔라나",   "symbol": "SOL"},
+    {"ticker": "KRW-XRP", "id": 148, "name": "리플",     "symbol": "XRP"}
 ]
 
 def job():
