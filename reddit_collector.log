@@ -1,0 +1,1477 @@
+2026-02-19 12:50:32 [INFO] ⏳ 백그라운드 수집기 가동 시작
+2026-02-19 12:50:32 [INFO] 👽 [Reddit-RSS] 수집 사이클 시작
+2026-02-19 12:50:33 [INFO] 💾 [BTC-new] 25건 저장/갱신 완료
+2026-02-19 12:50:42 [INFO] 💾 [BTC-hot] 25건 저장/갱신 완료
+2026-02-19 12:51:06 [INFO] 💾 [ETH-new] 25건 저장/갱신 완료
+2026-02-19 12:51:12 [INFO] 💾 [ETH-hot] 25건 저장/갱신 완료
+2026-02-19 12:51:36 [INFO] 💾 [SOL-new] 25건 저장/갱신 완료
+2026-02-19 12:51:44 [INFO] 💾 [SOL-hot] 25건 저장/갱신 완료
+2026-02-19 12:52:11 [INFO] 💾 [XRP-new] 25건 저장/갱신 완료
+2026-02-19 12:52:20 [INFO] 💾 [XRP-hot] 25건 저장/갱신 완료
+2026-02-19 12:52:39 [INFO] 💾 [ADA-new] 25건 저장/갱신 완료
+2026-02-19 12:52:49 [INFO] 💾 [ADA-hot] 25건 저장/갱신 완료
+2026-02-19 12:53:13 [INFO] 💾 [DOGE-new] 25건 저장/갱신 완료
+2026-02-19 12:53:22 [INFO] 💾 [DOGE-hot] 25건 저장/갱신 완료
+2026-02-19 12:53:46 [INFO] 💾 [DOT-new] 25건 저장/갱신 완료
+2026-02-19 12:53:52 [INFO] 💾 [DOT-hot] 25건 저장/갱신 완료
+2026-02-19 12:54:11 [INFO] 💾 [LINK-new] 25건 저장/갱신 완료
+2026-02-19 12:54:19 [INFO] 💾 [LINK-hot] 25건 저장/갱신 완료
+2026-02-19 12:54:46 [INFO] 💾 [TRX-new] 25건 저장/갱신 완료
+2026-02-19 12:54:52 [INFO] 💾 [TRX-hot] 25건 저장/갱신 완료
+2026-02-19 12:55:12 [INFO] 💾 [LTC-new] 25건 저장/갱신 완료
+2026-02-19 12:55:18 [INFO] 💾 [LTC-hot] 25건 저장/갱신 완료
+2026-02-19 12:55:42 [INFO] 💾 [MATIC-new] 25건 저장/갱신 완료
+2026-02-19 12:55:50 [INFO] 💾 [MATIC-hot] 25건 저장/갱신 완료
+2026-02-19 12:56:12 [INFO] 💾 [AVAX-new] 25건 저장/갱신 완료
+2026-02-19 12:56:20 [INFO] 💾 [AVAX-hot] 25건 저장/갱신 완료
+2026-02-19 12:56:42 [INFO] 💾 [UNI-new] 25건 저장/갱신 완료
+2026-02-19 12:56:49 [INFO] 💾 [UNI-hot] 25건 저장/갱신 완료
+2026-02-19 12:57:08 [INFO] 💾 [ATOM-new] 25건 저장/갱신 완료
+2026-02-19 12:57:17 [INFO] 💾 [ATOM-hot] 25건 저장/갱신 완료
+2026-02-19 12:57:39 [INFO] 💾 [FIL-new] 25건 저장/갱신 완료
+2026-02-19 12:57:48 [INFO] 💾 [FIL-hot] 25건 저장/갱신 완료
+2026-02-19 12:58:12 [INFO] 💾 [SHIB-new] 25건 저장/갱신 완료
+2026-02-19 12:58:19 [INFO] 💾 [SHIB-hot] 25건 저장/갱신 완료
+2026-02-19 12:58:49 [INFO] ✨ 수집 사이클 종료. 다음 스케줄 대기.
+2026-02-19 13:26:21 [INFO] ⏳ 백그라운드 수집기 가동 시작
+2026-02-19 13:26:21 [INFO] 👽 [Reddit-RSS] 수집 사이클 시작
+2026-02-19 13:26:22 [INFO] 💾 [BTC-new] 25건 저장/갱신 완료
+2026-02-19 13:26:31 [INFO] 💾 [BTC-hot] 25건 저장/갱신 완료
+2026-02-19 13:26:53 [INFO] 💾 [ETH-new] 25건 저장/갱신 완료
+2026-02-19 13:27:00 [INFO] 💾 [ETH-hot] 25건 저장/갱신 완료
+2026-02-19 13:27:20 [INFO] 💾 [SOL-new] 25건 저장/갱신 완료
+2026-02-19 13:27:29 [INFO] 💾 [SOL-hot] 25건 저장/갱신 완료
+2026-02-19 13:27:50 [INFO] 💾 [XRP-new] 25건 저장/갱신 완료
+2026-02-19 13:27:56 [INFO] 💾 [XRP-hot] 25건 저장/갱신 완료
+2026-02-19 13:28:21 [INFO] 💾 [ADA-new] 25건 저장/갱신 완료
+2026-02-19 13:28:27 [INFO] 💾 [ADA-hot] 25건 저장/갱신 완료
+2026-02-19 13:28:51 [INFO] 💾 [DOGE-new] 25건 저장/갱신 완료
+2026-02-19 13:28:57 [INFO] 💾 [DOGE-hot] 25건 저장/갱신 완료
+2026-02-19 13:29:21 [INFO] 💾 [DOT-new] 25건 저장/갱신 완료
+2026-02-19 13:29:31 [INFO] 💾 [DOT-hot] 25건 저장/갱신 완료
+2026-02-19 13:29:52 [INFO] 💾 [LINK-new] 25건 저장/갱신 완료
+2026-02-19 13:29:59 [INFO] 💾 [LINK-hot] 25건 저장/갱신 완료
+2026-02-19 13:30:22 [INFO] 💾 [TRX-new] 25건 저장/갱신 완료
+2026-02-19 13:30:31 [INFO] 💾 [TRX-hot] 25건 저장/갱신 완료
+2026-02-19 13:30:54 [INFO] 💾 [LTC-new] 25건 저장/갱신 완료
+2026-02-19 13:31:02 [INFO] 💾 [LTC-hot] 25건 저장/갱신 완료
+2026-02-19 13:31:27 [INFO] 💾 [MATIC-new] 25건 저장/갱신 완료
+2026-02-19 13:31:35 [INFO] 💾 [MATIC-hot] 25건 저장/갱신 완료
+2026-02-19 13:32:04 [INFO] 💾 [AVAX-new] 25건 저장/갱신 완료
+2026-02-19 13:32:11 [INFO] 💾 [AVAX-hot] 25건 저장/갱신 완료
+2026-02-19 13:32:35 [INFO] 💾 [UNI-new] 25건 저장/갱신 완료
+2026-02-19 13:32:44 [INFO] 💾 [UNI-hot] 25건 저장/갱신 완료
+2026-02-19 13:33:12 [INFO] 💾 [ATOM-new] 25건 저장/갱신 완료
+2026-02-19 13:33:23 [INFO] 💾 [ATOM-hot] 25건 저장/갱신 완료
+2026-02-19 13:33:43 [INFO] 💾 [FIL-new] 25건 저장/갱신 완료
+2026-02-19 13:33:54 [INFO] 💾 [FIL-hot] 25건 저장/갱신 완료
+2026-02-19 13:34:15 [INFO] 💾 [SHIB-new] 25건 저장/갱신 완료
+2026-02-19 13:34:27 [INFO] 💾 [SHIB-hot] 25건 저장/갱신 완료
+2026-02-19 13:34:49 [INFO] ✨ 수집 사이클 종료. 다음 스케줄 대기.
+2026-02-19 14:04:49 [INFO] 👽 [Reddit-RSS] 수집 사이클 시작
+2026-02-19 14:04:50 [INFO] 💾 [BTC-new] 25건 저장/갱신 완료
+2026-02-19 14:05:00 [INFO] 💾 [BTC-hot] 25건 저장/갱신 완료
+2026-02-19 14:05:26 [INFO] 💾 [ETH-new] 25건 저장/갱신 완료
+2026-02-19 14:05:37 [INFO] 💾 [ETH-hot] 25건 저장/갱신 완료
+2026-02-19 14:05:58 [INFO] 💾 [SOL-new] 25건 저장/갱신 완료
+2026-02-19 14:06:05 [INFO] 💾 [SOL-hot] 25건 저장/갱신 완료
+2026-02-19 14:06:28 [INFO] 💾 [XRP-new] 25건 저장/갱신 완료
+2026-02-19 14:06:37 [INFO] 💾 [XRP-hot] 25건 저장/갱신 완료
+2026-02-19 14:06:56 [INFO] 💾 [ADA-new] 25건 저장/갱신 완료
+2026-02-19 14:07:06 [INFO] 💾 [ADA-hot] 25건 저장/갱신 완료
+2026-02-19 14:07:26 [INFO] 💾 [DOGE-new] 25건 저장/갱신 완료
+2026-02-19 14:07:34 [INFO] 💾 [DOGE-hot] 25건 저장/갱신 완료
+2026-02-19 14:08:01 [INFO] 💾 [DOT-new] 25건 저장/갱신 완료
+2026-02-19 14:08:10 [INFO] 💾 [DOT-hot] 25건 저장/갱신 완료
+2026-02-19 14:08:32 [INFO] 💾 [LINK-new] 25건 저장/갱신 완료
+2026-02-19 14:08:38 [INFO] 💾 [LINK-hot] 25건 저장/갱신 완료
+2026-02-19 14:09:06 [INFO] 💾 [TRX-new] 25건 저장/갱신 완료
+2026-02-19 14:09:13 [INFO] 💾 [TRX-hot] 25건 저장/갱신 완료
+2026-02-19 14:09:29 [INFO] 💾 [LTC-new] 25건 저장/갱신 완료
+2026-02-19 14:09:36 [INFO] 💾 [LTC-hot] 25건 저장/갱신 완료
+2026-02-19 14:10:06 [INFO] 💾 [MATIC-new] 25건 저장/갱신 완료
+2026-02-19 14:10:15 [INFO] 💾 [MATIC-hot] 25건 저장/갱신 완료
+2026-02-19 14:10:36 [INFO] 💾 [AVAX-new] 25건 저장/갱신 완료
+2026-02-19 14:10:44 [INFO] 💾 [AVAX-hot] 25건 저장/갱신 완료
+2026-02-19 14:11:07 [INFO] 💾 [UNI-new] 25건 저장/갱신 완료
+2026-02-19 14:11:17 [INFO] 💾 [UNI-hot] 25건 저장/갱신 완료
+2026-02-19 14:11:37 [INFO] 💾 [ATOM-new] 25건 저장/갱신 완료
+2026-02-19 14:11:48 [INFO] 💾 [ATOM-hot] 25건 저장/갱신 완료
+2026-02-19 14:12:06 [INFO] 💾 [FIL-new] 25건 저장/갱신 완료
+2026-02-19 14:12:13 [INFO] 💾 [FIL-hot] 25건 저장/갱신 완료
+2026-02-19 14:12:32 [INFO] 💾 [SHIB-new] 25건 저장/갱신 완료
+2026-02-19 14:12:38 [INFO] 💾 [SHIB-hot] 25건 저장/갱신 완료
+2026-02-19 14:13:00 [INFO] ✨ 수집 사이클 종료. 다음 스케줄 대기.
+2026-02-19 14:42:40 [INFO] ⏳ 백그라운드 수집기 가동 시작
+2026-02-19 14:42:40 [INFO] 👽 [Reddit-RSS] 수집 사이클 시작
+2026-02-19 14:42:40 [INFO] 💾 [BTC-new] 25건 저장/갱신 완료
+2026-02-19 14:42:48 [INFO] 💾 [BTC-hot] 25건 저장/갱신 완료
+2026-02-19 14:43:09 [INFO] 💾 [ETH-new] 25건 저장/갱신 완료
+2026-02-19 14:43:17 [INFO] 💾 [ETH-hot] 25건 저장/갱신 완료
+2026-02-19 14:43:35 [INFO] 💾 [SOL-new] 25건 저장/갱신 완료
+2026-02-19 14:43:41 [INFO] 💾 [SOL-hot] 25건 저장/갱신 완료
+2026-02-19 14:44:05 [INFO] 💾 [XRP-new] 25건 저장/갱신 완료
+2026-02-19 14:44:16 [INFO] 💾 [XRP-hot] 25건 저장/갱신 완료
+2026-02-19 14:44:44 [INFO] 💾 [ADA-new] 25건 저장/갱신 완료
+2026-02-19 14:44:53 [INFO] 💾 [ADA-hot] 25건 저장/갱신 완료
+2026-02-19 14:45:16 [INFO] 💾 [DOGE-new] 25건 저장/갱신 완료
+2026-02-19 14:45:22 [INFO] 💾 [DOGE-hot] 25건 저장/갱신 완료
+2026-02-19 14:45:51 [INFO] 💾 [DOT-new] 25건 저장/갱신 완료
+2026-02-19 14:46:00 [INFO] 💾 [DOT-hot] 25건 저장/갱신 완료
+2026-02-19 14:46:29 [INFO] 💾 [LINK-new] 25건 저장/갱신 완료
+2026-02-19 14:46:35 [INFO] 💾 [LINK-hot] 25건 저장/갱신 완료
+2026-02-19 14:47:03 [INFO] 💾 [TRX-new] 25건 저장/갱신 완료
+2026-02-19 14:47:09 [INFO] ⏳ 백그라운드 수집기 가동 시작
+2026-02-19 14:47:09 [INFO] 👽 [Reddit-RSS] 수집 사이클 시작
+2026-02-19 14:47:10 [INFO] 💾 [BTC-new] 25건 저장/갱신 완료
+2026-02-19 14:47:17 [INFO] 💾 [BTC-hot] 25건 저장/갱신 완료
+2026-02-19 14:47:38 [INFO] 💾 [ETH-new] 25건 저장/갱신 완료
+2026-02-19 14:47:48 [INFO] 💾 [ETH-hot] 25건 저장/갱신 완료
+2026-02-19 14:48:11 [INFO] 💾 [SOL-new] 25건 저장/갱신 완료
+2026-02-19 14:48:20 [INFO] 💾 [SOL-hot] 25건 저장/갱신 완료
+2026-02-19 14:48:42 [INFO] 💾 [XRP-new] 25건 저장/갱신 완료
+2026-02-19 14:48:52 [INFO] 💾 [XRP-hot] 25건 저장/갱신 완료
+2026-02-19 14:49:21 [INFO] 💾 [ADA-new] 25건 저장/갱신 완료
+2026-02-19 14:49:27 [INFO] 💾 [ADA-hot] 25건 저장/갱신 완료
+2026-02-19 14:49:52 [INFO] 💾 [DOGE-new] 25건 저장/갱신 완료
+2026-02-19 14:50:03 [INFO] 💾 [DOGE-hot] 25건 저장/갱신 완료
+2026-02-19 14:50:30 [INFO] 💾 [DOT-new] 25건 저장/갱신 완료
+2026-02-19 14:50:37 [INFO] 💾 [DOT-hot] 25건 저장/갱신 완료
+2026-02-19 14:51:00 [INFO] 💾 [LINK-new] 25건 저장/갱신 완료
+2026-02-19 14:51:09 [INFO] 💾 [LINK-hot] 25건 저장/갱신 완료
+2026-02-19 14:51:29 [INFO] 💾 [TRX-new] 25건 저장/갱신 완료
+2026-02-19 14:51:39 [INFO] 💾 [TRX-hot] 25건 저장/갱신 완료
+2026-02-19 14:52:00 [INFO] 💾 [LTC-new] 25건 저장/갱신 완료
+2026-02-19 14:52:09 [INFO] 💾 [LTC-hot] 25건 저장/갱신 완료
+2026-02-19 14:52:40 [INFO] 💾 [MATIC-new] 25건 저장/갱신 완료
+2026-02-19 14:52:49 [INFO] 💾 [MATIC-hot] 25건 저장/갱신 완료
+2026-02-19 14:53:19 [INFO] 💾 [AVAX-new] 25건 저장/갱신 완료
+2026-02-19 14:53:28 [INFO] 💾 [AVAX-hot] 25건 저장/갱신 완료
+2026-02-19 14:53:53 [INFO] 💾 [UNI-new] 25건 저장/갱신 완료
+2026-02-19 14:54:04 [INFO] 💾 [UNI-hot] 25건 저장/갱신 완료
+2026-02-19 14:54:24 [INFO] 💾 [ATOM-new] 25건 저장/갱신 완료
+2026-02-19 14:54:34 [INFO] 💾 [ATOM-hot] 25건 저장/갱신 완료
+2026-02-19 14:54:53 [INFO] 💾 [FIL-new] 25건 저장/갱신 완료
+2026-02-19 14:55:01 [INFO] 💾 [FIL-hot] 25건 저장/갱신 완료
+2026-02-19 14:55:31 [INFO] 💾 [SHIB-new] 25건 저장/갱신 완료
+2026-02-19 14:55:37 [INFO] 💾 [SHIB-hot] 25건 저장/갱신 완료
+2026-02-19 14:55:54 [INFO] ✨ 수집 사이클 종료. 다음 스케줄 대기.
+2026-02-19 15:25:55 [INFO] 👽 [Reddit-RSS] 수집 사이클 시작
+2026-02-19 15:25:56 [INFO] 💾 [BTC-new] 25건 저장/갱신 완료
+2026-02-19 15:26:07 [INFO] 💾 [BTC-hot] 25건 저장/갱신 완료
+2026-02-19 15:26:31 [INFO] 💾 [ETH-new] 25건 저장/갱신 완료
+2026-02-19 15:26:41 [INFO] 💾 [ETH-hot] 25건 저장/갱신 완료
+2026-02-19 15:27:05 [INFO] 💾 [SOL-new] 25건 저장/갱신 완료
+2026-02-19 15:27:15 [INFO] 💾 [SOL-hot] 25건 저장/갱신 완료
+2026-02-19 15:27:38 [INFO] 💾 [XRP-new] 25건 저장/갱신 완료
+2026-02-19 15:27:45 [INFO] 💾 [XRP-hot] 25건 저장/갱신 완료
+2026-02-19 15:28:09 [INFO] 💾 [ADA-new] 25건 저장/갱신 완료
+2026-02-19 15:28:18 [INFO] 💾 [ADA-hot] 25건 저장/갱신 완료
+2026-02-19 15:28:39 [INFO] 💾 [DOGE-new] 25건 저장/갱신 완료
+2026-02-19 15:28:50 [INFO] 💾 [DOGE-hot] 25건 저장/갱신 완료
+2026-02-19 15:29:10 [INFO] 💾 [DOT-new] 25건 저장/갱신 완료
+2026-02-19 15:29:19 [INFO] 💾 [DOT-hot] 25건 저장/갱신 완료
+2026-02-19 15:29:41 [INFO] 💾 [LINK-new] 25건 저장/갱신 완료
+2026-02-19 15:29:50 [INFO] 💾 [LINK-hot] 25건 저장/갱신 완료
+2026-02-19 15:30:15 [INFO] 💾 [TRX-new] 25건 저장/갱신 완료
+2026-02-19 15:30:23 [INFO] 💾 [TRX-hot] 25건 저장/갱신 완료
+2026-02-19 15:30:44 [INFO] 💾 [LTC-new] 25건 저장/갱신 완료
+2026-02-19 15:30:55 [INFO] 💾 [LTC-hot] 25건 저장/갱신 완료
+2026-02-19 15:31:22 [INFO] 💾 [MATIC-new] 25건 저장/갱신 완료
+2026-02-19 15:31:28 [INFO] 💾 [MATIC-hot] 25건 저장/갱신 완료
+2026-02-19 15:31:48 [INFO] 💾 [AVAX-new] 25건 저장/갱신 완료
+2026-02-19 15:32:00 [INFO] 💾 [AVAX-hot] 25건 저장/갱신 완료
+2026-02-19 15:32:24 [INFO] 💾 [UNI-new] 25건 저장/갱신 완료
+2026-02-19 15:32:31 [INFO] 💾 [UNI-hot] 25건 저장/갱신 완료
+2026-02-19 15:33:00 [INFO] 💾 [ATOM-new] 25건 저장/갱신 완료
+2026-02-19 15:33:07 [INFO] 💾 [ATOM-hot] 25건 저장/갱신 완료
+2026-02-19 15:33:33 [INFO] 💾 [FIL-new] 25건 저장/갱신 완료
+2026-02-19 15:33:41 [INFO] 💾 [FIL-hot] 25건 저장/갱신 완료
+2026-02-19 15:34:04 [INFO] 💾 [SHIB-new] 25건 저장/갱신 완료
+2026-02-19 15:34:15 [INFO] 💾 [SHIB-hot] 25건 저장/갱신 완료
+2026-02-19 15:34:35 [INFO] ✨ 수집 사이클 종료. 다음 스케줄 대기.
+2026-02-19 16:04:36 [INFO] 👽 [Reddit-RSS] 수집 사이클 시작
+2026-02-19 16:04:37 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:04:43 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:05:08 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:05:14 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:05:42 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:05:48 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:06:17 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:06:26 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:08:03 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:08:10 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:08:36 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:08:45 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:09:07 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:09:14 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:09:40 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:09:47 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:10:11 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:10:19 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:10:39 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:10:47 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:11:14 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:11:22 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:11:43 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:11:51 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:12:12 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:12:21 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:12:46 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:12:53 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:13:12 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:13:22 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:13:53 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:14:00 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:14:22 [INFO] ✨ 수집 사이클 종료. 다음 스케줄 대기.
+2026-02-19 16:44:23 [INFO] 👽 [Reddit-RSS] 수집 사이클 시작
+2026-02-19 16:44:23 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:44:30 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:44:52 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:45:02 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:45:24 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:45:31 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:45:49 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:45:58 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:46:28 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:46:35 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:47:04 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:47:12 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:47:32 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:47:40 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:48:04 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:48:13 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:48:41 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:48:50 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:49:14 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:49:23 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:49:49 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:49:56 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:50:23 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:50:30 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:50:58 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:51:06 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:51:27 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:51:33 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:51:55 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:52:05 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:52:30 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:52:36 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 16:53:00 [INFO] ✨ 수집 사이클 종료. 다음 스케줄 대기.
+2026-02-19 17:23:01 [INFO] 👽 [Reddit-RSS] 수집 사이클 시작
+2026-02-19 17:23:02 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:23:12 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:23:39 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:23:45 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:24:07 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:24:18 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:24:45 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:24:54 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:25:23 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:25:30 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:25:47 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:25:53 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:26:20 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:26:29 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:26:57 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:27:03 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:27:28 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:27:34 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:28:01 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:28:09 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:28:29 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:28:36 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:29:02 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:29:10 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:29:37 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:29:46 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:30:04 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:30:14 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:30:33 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:30:45 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:31:02 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:31:11 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 17:31:33 [INFO] ✨ 수집 사이클 종료. 다음 스케줄 대기.
+2026-02-19 18:12:05 [INFO] 👽 [Reddit-RSS] 수집 사이클 시작
+2026-02-19 18:12:06 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:12:57 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:13:24 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:13:35 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:13:59 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:14:09 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:14:39 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:14:48 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:15:09 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:15:17 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:15:39 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:15:48 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:16:06 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:16:13 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:16:37 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:16:44 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:17:04 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:17:11 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:17:36 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:17:43 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:18:03 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:18:11 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:18:36 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:18:46 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:19:08 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:19:17 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:19:39 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:19:46 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:20:08 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:20:17 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:20:45 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:20:51 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 18:21:12 [INFO] ✨ 수집 사이클 종료. 다음 스케줄 대기.
+2026-02-19 18:58:32 [INFO] 👽 [Reddit-RSS] 수집 사이클 시작
+2026-02-19 18:58:33 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:28:54 [ERROR] ⚠️ 에러 발생 [BTC]: HTTPSConnectionPool(host='www.reddit.com', port=443): Read timed out. (read timeout=15)
+2026-02-19 19:29:17 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:29:24 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:29:46 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:29:57 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:30:16 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:30:25 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:30:46 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:30:54 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:31:24 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:31:30 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:31:55 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:32:05 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:32:34 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:32:43 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:33:08 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:33:18 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:33:40 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:33:48 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:34:11 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:34:21 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:34:49 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:35:00 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:35:21 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:35:31 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:36:00 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:36:12 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:36:33 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:36:39 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:37:01 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:37:07 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 19:37:31 [INFO] ✨ 수집 사이클 종료. 다음 스케줄 대기.
+2026-02-19 20:07:32 [INFO] 👽 [Reddit-RSS] 수집 사이클 시작
+2026-02-19 20:07:33 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:07:43 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:08:05 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:08:12 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:08:34 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:08:45 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:09:13 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:09:20 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:09:43 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:09:49 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:10:13 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:10:19 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:10:44 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:10:53 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:11:13 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:11:19 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:11:37 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:11:46 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:12:08 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:12:14 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:12:31 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:12:37 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:12:56 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:13:07 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:13:29 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:13:36 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:13:53 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:14:01 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:14:18 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:14:25 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:14:42 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:14:50 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:15:11 [INFO] ✨ 수집 사이클 종료. 다음 스케줄 대기.
+2026-02-19 20:45:11 [INFO] 👽 [Reddit-RSS] 수집 사이클 시작
+2026-02-19 20:45:12 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:45:20 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:45:45 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:45:51 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:46:21 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:46:29 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:47:00 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:47:06 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:47:34 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:47:45 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:48:10 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:48:17 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:48:41 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:48:50 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:49:21 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:49:32 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:49:52 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:49:59 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:50:19 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:50:29 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:50:54 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:51:01 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:51:26 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:51:32 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:51:51 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:51:59 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:52:21 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:52:29 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:52:55 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:53:03 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:53:28 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:53:38 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 20:53:57 [INFO] ✨ 수집 사이클 종료. 다음 스케줄 대기.
+2026-02-19 21:23:57 [INFO] 👽 [Reddit-RSS] 수집 사이클 시작
+2026-02-19 21:23:58 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:24:08 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:24:30 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:24:39 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:25:05 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:25:16 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:25:37 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:25:44 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:26:07 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:26:16 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:26:36 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:26:46 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:27:08 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:27:16 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:27:39 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:27:48 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:28:07 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:28:13 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:28:39 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:28:47 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:29:08 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:29:16 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:29:45 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:29:54 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:30:17 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:30:26 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:30:53 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:30:59 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:31:22 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:31:31 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:31:56 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:32:03 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 21:32:22 [INFO] ✨ 수집 사이클 종료. 다음 스케줄 대기.
+2026-02-19 22:02:22 [INFO] 👽 [Reddit-RSS] 수집 사이클 시작
+2026-02-19 22:02:23 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 22:02:33 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 22:02:54 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 22:03:03 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 22:03:25 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 22:03:31 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 22:03:58 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 22:04:07 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 22:04:34 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 22:04:42 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 22:05:09 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 22:05:19 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 22:05:40 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 22:05:51 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 22:06:28 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 22:06:41 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 22:07:17 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 22:07:33 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 22:08:02 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-19 22:58:36 [ERROR] ⚠️ 에러 발생 [LTC]: HTTPSConnectionPool(host='www.reddit.com', port=443): Read timed out. (read timeout=15)
+2026-02-19 23:49:06 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 00:40:03 [ERROR] ⚠️ 에러 발생 [MATIC]: HTTPSConnectionPool(host='www.reddit.com', port=443): Read timed out. (read timeout=15)
+2026-02-20 01:23:53 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 02:27:02 [ERROR] ⚠️ 에러 발생 [AVAX]: HTTPSConnectionPool(host='www.reddit.com', port=443): Read timed out. (read timeout=15)
+2026-02-20 03:27:29 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 04:11:09 [ERROR] ⚠️ 에러 발생 [UNI]: HTTPSConnectionPool(host='www.reddit.com', port=443): Read timed out.
+2026-02-20 04:28:49 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 05:00:56 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 05:59:07 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 06:13:02 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 07:14:05 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 07:47:26 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 08:17:54 [INFO] ✨ 수집 사이클 종료. 다음 스케줄 대기.
+2026-02-20 08:50:24 [INFO] 👽 [Reddit-RSS] 수집 사이클 시작
+2026-02-20 08:50:25 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:06:35 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:06:59 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:07:07 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:07:33 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:07:39 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:08:01 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:08:07 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:08:25 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:08:33 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:08:52 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:09:01 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:09:18 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:09:25 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:09:45 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:09:53 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:10:14 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:10:24 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:10:46 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:10:54 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:11:19 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:11:30 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:11:47 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:11:53 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:12:17 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:12:24 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:12:52 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:13:00 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:13:23 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:13:32 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:13:50 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:14:01 [ERROR] ❌ DB 저장 에러: relation "public.community_data" does not exist
+LINE 2:                 INSERT INTO public.community_data
+                                    ^
+
+2026-02-20 09:14:20 [INFO] ✨ 수집 사이클 종료. 다음 스케줄 대기.

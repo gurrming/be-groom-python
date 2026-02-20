@@ -40,17 +40,17 @@ def check_news_data():
     null_check_query = f"""
     SELECT 
         COUNT(*) FILTER (WHERE title IS NULL) as title_null,
-        COUNT(*) FILTER (WHERE content IS NULL OR content = '') as content_null,
-        COUNT(*) FILTER (WHERE source IS NULL) as source_null
+        COUNT(*) FILTER (WHERE description IS NULL OR description = '') as description_null,
+        COUNT(*) FILTER (WHERE sentiment_label IS NULL) as sentiment_label_null
     FROM {table_name};
     """
     try:
         null_df = pd.read_sql(null_check_query, connection)
         print(null_df.to_string(index=False))
         
-        content_null_count = null_df['content_null'][0]
-        if content_null_count > 0:
-            print(f"   ⚠️ 경고: 본문(content)이 비어있는 데이터가 {content_null_count}개 있습니다.")
+        description_null_count = null_df['description_null'][0]
+        if description_null_count > 0:
+            print(f"   ⚠️ 경고: 본문(content)이 비어있는 데이터가 {description_null_count}개 있습니다.")
             print("   -> 감성 분석 시 에러가 발생하므로 제외하거나 다시 수집해야 합니다.")
     except Exception as e:
         print(f"   (컬럼명 불일치로 확인 실패: {e})")
@@ -60,10 +60,10 @@ def check_news_data():
     print("\n3. 출처(Source)별 데이터 분포:")
     try:
         source_query = f"""
-        SELECT source, COUNT(*) as count, 
+        SELECT sentiment_label, COUNT(*) as count, 
                ROUND(COUNT(*) * 100.0 / {total_count}, 2) as ratio
         FROM {table_name}
-        GROUP BY source
+        GROUP BY sentiment_label
         ORDER BY count DESC;
         """
         source_df = pd.read_sql(source_query, connection)
