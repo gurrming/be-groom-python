@@ -20,15 +20,16 @@ def sync_upbit_categories():
         upbit_symbols[symbol] = SPECIAL_NAMES.get(symbol, m['korean_name'])
 
     # DB 접속 정보 (사용자 제공 정보 반영)
-    db_params = {
-        "host": "heartbit-db-k.ct8oi6y6qlmp.ap-northeast-2.rds.amazonaws.com",
-        "port": "5432",
-        "database": "heartbit",
-        "user": "postgre",
-        "password": "heartbit,,1234",
-        "connect_timeout": 15,
-        "sslmode": "require"      
-    }
+def get_db_connection():
+    return psycopg2.connect(
+        host=os.getenv("DB_HOST"),
+        port=os.getenv("DB_PORT"), 
+        database=os.getenv("DB_NAME"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        connect_timeout=5,
+        options="-c client_encoding=UTF8"
+    )
 
     # db_params = {
     #     "user": "postgres",

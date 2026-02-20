@@ -12,15 +12,22 @@ load_dotenv()
 #         database="app", user="postgres", password="0000"
 #     )
 
+import os
+import psycopg2
+from dotenv import load_dotenv
+
+# .env 파일 안의 정보들을 환경 변수로 불러옵니다.
+load_dotenv()
+
 def get_db_connection():
     return psycopg2.connect(
-        host = "heartbit-db-k.ct8oi6y6qlmp.ap-northeast-2.rds.amazonaws.com",
-        port = "5432",
-        database = "heartbit",
-        user = "postgre",
-        password = "heartbit,,1234",
-        connect_timeout = 5,
-        options = "-c client_encoding=UTF8"
+        host=os.getenv("DB_HOST"),
+        port=os.getenv("DB_PORT"), 
+        database=os.getenv("DB_NAME"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        connect_timeout=5,
+        options="-c client_encoding=UTF8"
     )
 
 
