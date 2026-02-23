@@ -1,26 +1,12 @@
 import os
-from dotenv import load_dotenv
 import requests
 import psycopg2
-from psycopg2.extras import execute_values
+from dotenv import load_dotenv
 
 load_dotenv()
 
-def sync_upbit_categories():
-    # 1. 업비트 정보 가져오기 (기존 로직 동일)
-    url = "https://api.upbit.com/v1/market/all"
-    res = requests.get(url)
-    all_markets = res.json()
-    krw_markets = [m for m in all_markets if m['market'].startswith('KRW-')]
-    
-    SPECIAL_NAMES = {'EOS': '이오스', 'ADA': '에이다', 'ALGO': '알고랜드'}
-    upbit_symbols = {}
-    for m in krw_markets:
-        symbol = m['market'].replace('KRW-', '')
-        upbit_symbols[symbol] = SPECIAL_NAMES.get(symbol, m['korean_name'])
-
-    # DB 접속 정보 (사용자 제공 정보 반영)
 def get_db_connection():
+    # 배포/로컬 환경에 맞춰 접속 정보를 수정해서 사용하세요!
     return psycopg2.connect(
         host=os.getenv("DB_HOST"),
         port=os.getenv("DB_PORT"), 
@@ -31,64 +17,64 @@ def get_db_connection():
         options="-c client_encoding=UTF8"
     )
 
-    # db_params = {
-    #     "user": "postgres",
-    #     "password": "0000",
-    #     "database": "app", 
-    #     "host": "localhost",
-    #     "port": 15432,
-    #     "connect_timeout": 5,
-    #     "sslmode": "disable"      
-    # }
+def sync_top_100_with_vip():
+    # 💡 무조건 포함시킬 '근본/메이저 코인' 리스트 (원하는 코인 심볼을 자유롭게 추가/수정하세요)
+    VIP_COINS = ['BTC', 'ETH', 'XRP', 'SOL', 'ADA', 'DOGE', 'AVAX', 'DOT', 'LINK', 'BCH', 'SHIB']
+    
+    # 1. 업비트 전체 KRW 마켓 정보 가져오기
+    url = "https://api.upbit.com/v1/market/all"
+    res = requests.get(url)
+    all_markets = res.json()
+    krw_markets = [m for m in all_markets if m['market'].startswith('KRW-')]
+    
+    market_codes = [m['market'] for m in krw_markets]
+    
+    # 2. 현재 시세를 가져와서 24시간 거래대금 순으로 정렬
+    ticker_url = f"https://api.upbit.com/v1/ticker?markets={','.join(market_codes)}"
+    tickers = requests.get(ticker_url).json()
+    
+    sorted_tickers = sorted(tickers, key=lambda x: x['acc_trade_price_24h'], reverse=True)
 
-    conn = psycopg2.connect(**db_params)
+    # 3. VIP 코인을 먼저 담고, 남은 자리를 거래대금 상위 코인으로 채워 딱 100개 맞추기
+    active_symbols = set(VIP_COINS) # 중복 방지를 위해 set 사용
+    
+    for t in sorted_tickers:
+        if len(active_symbols) >= 100:
+            break # 100개가 다 차면 멈춤
+            
+        symbol = t['market'].replace('KRW-', '')
+        active_symbols.add(symbol)
+
+    # 4. DB 접속 및 비활성화/활성화 처리
+    conn = get_db_connection()
     cur = conn.cursor()
 
     try:
-        # [STEP 1] DB에 저장된 기존 카테고리 정보 전체 조회
-        cur.execute("SELECT symbol, category_name, is_active FROM public.category;")
-        db_rows = cur.fetchall()
-        db_data = {row[0]: {"name": row[1], "active": row[2]} for row in db_rows}
+        cur.execute("SELECT symbol FROM category;")
+        all_db_symbols = [row[0] for row in cur.fetchall()]
 
-        new_count = 0
-        update_count = 0
-        reactivate_count = 0
+        # DB에 있는 전체 코인 중 active_symbols(선정된 100개)에 없는 것들은 비활성화 대상
+        symbols_to_disable = [s for s in all_db_symbols if s not in active_symbols]
+        symbols_to_enable = list(active_symbols)
 
-        # [STEP 2] 업비트 리스트를 돌며 비교 분석
-        for symbol, name in upbit_symbols.items():
-            if symbol not in db_data:
-                # A. 아예 없는 새로운 코인 -> INSERT (이때만 ID가 생성됨)
-                cur.execute(
-                    "INSERT INTO public.category (category_name, symbol, is_active) VALUES (%s, %s, TRUE);",
-                    (name, symbol)
-                )
-                new_count += 1
-            else:
-                # B. 이미 있는 코인
-                existing = db_data[symbol]
-                # 이름이 바뀌었거나, 비활성 상태라면 -> UPDATE (ID 보존)
-                if existing['name'] != name or existing['active'] is False:
-                    cur.execute(
-                        "UPDATE public.category SET category_name = %s, is_active = TRUE WHERE symbol = %s;",
-                        (name, symbol)
-                    )
-                    if existing['active'] is False: reactivate_count += 1
-                    else: update_count += 1
-
-        # [STEP 3] 상장 폐지 처리 (Delete 대신 Soft Delete)
-        # 업비트에는 없는데 DB에는 active인 것들만 비활성화
-        symbols_to_disable = [s for s in db_data.keys() if s not in upbit_symbols and db_data[s]['active'] is True]
-        
         if symbols_to_disable:
+            # 100위 밖 + VIP가 아닌 코인들은 비활성화
             cur.execute(
-                "UPDATE public.category SET is_active = FALSE WHERE symbol IN %s;",
-                (tuple(symbols_to_disable),)
+                "UPDATE category SET is_active = FALSE WHERE symbol = ANY(%s);",
+                (symbols_to_disable,)
+            )
+            
+        if symbols_to_enable:
+            # 선정된 100개의 코인은 확실하게 활성화
+            cur.execute(
+                "UPDATE category SET is_active = TRUE WHERE symbol = ANY(%s);",
+                (symbols_to_enable,)
             )
 
         conn.commit()
-        print(f"✅ 동기화 완료!")
-        print(f"✨ 신규 추가: {new_count}개 / 🔄 이름 수정: {update_count}개 / ♻️ 재활성화: {reactivate_count}개")
-        print(f"💤 상장 폐지(비활성화): {len(symbols_to_disable)}개")
+        print(f"✅ DB 업데이트 완벽하게 끝났습니다!")
+        print(f"👑 VIP 포함 상위 100개 세팅 완료")
+        print(f"💤 100위 밖 {len(symbols_to_disable)}개 코인 꿀잠(비활성화) 처리 완료")
 
     except Exception as e:
         conn.rollback()
@@ -98,4 +84,4 @@ def get_db_connection():
         conn.close()
 
 if __name__ == "__main__":
-    sync_upbit_categories()
+    sync_top_100_with_vip()

@@ -22,8 +22,19 @@ websockets==12.0
 python-dateutil==2.9.0
 typing_extensions==4.10.0
 
-
 # 시스템 종속 라이브러리 (버전 고정 해제하여 호환성 확보)
 altgraph
 future
 six
+
+# ----------------------------------------
+# 새로 추가된 라이브러리 (AI, Vector DB, 파싱 등)
+# ----------------------------------------
+feedparser
+torch
+qdrant-client
+sentence-transformers
+SQLAlchemy
+transformers
+tqdm
+langchain-cohere

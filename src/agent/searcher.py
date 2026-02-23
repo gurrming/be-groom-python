@@ -1,3 +1,4 @@
+import os
 import torch
 from qdrant_client import QdrantClient
 from qdrant_client.models import Filter, FieldCondition, MatchValue
@@ -8,8 +9,10 @@ class QdrantSearcher:
         # 맥북 가속(MPS) 설정 및 모델 로드
         self.device = "mps" if torch.backends.mps.is_available() else "cpu"
         self.model = SentenceTransformer('intfloat/multilingual-e5-small', device=self.device)
-        self.client = QdrantClient(url="http://localhost:6333")
-
+        self.client = QdrantClient(
+            url=os.getenv("QDRANT_HOST"),
+            api_key=os.getenv("QDRANT_API_KEY")
+        )
     # searcher.py 파일의 search_similar_contexts 함수 일부분 수정
     def search_similar_contexts(self, query_text, category_id, limit=3):
         query_vector = self.model.encode(f"query: {query_text}").tolist()
