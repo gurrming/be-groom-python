@@ -1,53 +1,49 @@
+import os
 import psycopg2
-from qdrant_client import QdrantClient
+from dotenv import load_dotenv
 
-# 1. DB 연결 설정 (사용하시는 설정에 맞게 수정)
-DB_CONFIG = {
-    "host": "localhost", "port": "15432",
-    "database": "app", "user": "postgres", "password": "0000"
-}
+load_dotenv()
 
-def check_postgres():
-    print("🔵 [PostgreSQL 데이터 확인]")
+def check_db_status():
     try:
-        conn = psycopg2.connect(**DB_CONFIG)
+        # DB 연결
+        conn = psycopg2.connect(
+            host=os.getenv("DB_HOST"),
+            port=os.getenv("DB_PORT"), 
+            database=os.getenv("DB_NAME"),
+            user=os.getenv("DB_USER"),
+            password=os.getenv("DB_PASSWORD"),
+            connect_timeout=5,
+            options="-c client_encoding=UTF8"
+        )
         cur = conn.cursor()
         
-        for table in ["news_data", "community_data"]:
-            cur.execute(f"SELECT count(*) FROM {table};")
-            count = cur.fetchone()[0]
-            print(f" - {table} 테이블: 총 {count}개 데이터 저장됨")
-            
-            if count > 0:
-                cur.execute(f"SELECT title FROM {table} ORDER BY published_at DESC LIMIT 1;")
-                latest = cur.fetchone()[0]
-                print(f"   ㄴ 최신 글 제목: {latest[:50]}...")
+        # 1. 전체 데이터 개수 확인
+        cur.execute("SELECT count(*) FROM news_data;")
+        total_count = cur.fetchone()[0]
         
-        cur.close()
-        conn.close()
-    except Exception as e:
-        print(f"❌ Postgres 연결 실패: {e}")
+        # 2. 비활성화된 데이터 개수 확인
+        cur.execute("SELECT count(*) FROM news_data WHERE is_active = FALSE;")
+        inactive_count = cur.fetchone()[0]
+        
+        print("📊 현재 DB 상태 점검 📊")
+        print(f"전체 데이터 개수: {total_count}개")
+        print(f"비활성화(is_active=FALSE) 데이터 개수: {inactive_count}개")
+        print(f"✅ 현재 활성화된 데이터 개수: {total_count - inactive_count}개\n")
 
-def check_qdrant():
-    print("\n🟢 [Qdrant 벡터 DB 데이터 확인]")
-    try:
-        client = QdrantClient(url="http://localhost:6333")
-        
-        for col in ["news_collection", "community_collection"]:
-            # 컬렉션 정보 가져오기
-            col_info = client.get_collection(collection_name=col)
-            print(f" - {col} 방: 총 {col_info.points_count}개 벡터 저장됨")
-            
-            # 샘플 데이터 1개 훔쳐보기
-            if col_info.points_count > 0:
-                sample, _ = client.scroll(collection_name=col, limit=1)
-                payload = sample[0].payload
-                print(f"   ㄴ 샘플 Payload: {payload}")
+        # 3. 비활성화된 데이터 샘플 확인 (선택 사항)
+        if inactive_count > 0:
+            cur.execute("SELECT news_id, symbol FROM news_data WHERE is_active = FALSE LIMIT 3;")
+            sample_data = cur.fetchall()
+            print("💤 비활성화된 데이터 샘플 (news_id, symbol):")
+            for row in sample_data:
+                print(f" - ID: {row[0]}, Symbol: {row[1]}")
                 
     except Exception as e:
-        print(f"❌ Qdrant 연결 실패: {e}")
-
+        print(f"❌ DB 연결 또는 쿼리 실행 중 오류 발생: {e}")
+    finally:
+        if 'cur' in locals(): cur.close()
+        if 'conn' in locals(): conn.close()
 
 if __name__ == "__main__":
-    check_postgres()
-    check_qdrant()
+    check_db_status()
